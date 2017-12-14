@@ -1,1 +1,5 @@
-import { Scene } from 'three';
+import WebGL from './webgl';
+
+const webgl = new WebGL();
+webgl.init();
+webgl.main();
