@@ -32,6 +32,8 @@
     "webpack-dev-server": "^2.9.7"
   },
   "dependencies": {
-    "three": "^0.88.0"
+    "three": "^0.88.0",
+    "three-addons": "^1.1.0",
+    "three-effectcomposer-es6": "^0.0.4"
   }
 }

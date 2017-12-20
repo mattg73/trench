@@ -19,4 +19,8 @@ export default class Scene extends THREEScene {
       this.add(this.lights.sun);
       this.add(this.cube.container);
   }
+
+  update(){
+    this.cube.update();
+  }
 }
