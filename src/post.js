@@ -20,7 +20,7 @@ export default class Post{
     //this.objectComposer = new EffectComposer(renderer, renderTargetObject);
     //this.objectComposer.setSize(window.innerWidth, window.innerHeight);
 
-    this.mainComposer = new EffectComposer(renderer);
+    this.mainComposer = new EffectComposer(renderer, this.renderTargetMain);
 
     //this.bloomComposer = new EffectComposer(renderer, renderTarget2);
     //this.bloomComposer.setSize(window.innerWidth, window.innerHeight);
