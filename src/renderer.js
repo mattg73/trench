@@ -11,6 +11,6 @@ export default class Renderer extends WebGLRenderer{
   }
 
   update(scene, camera){
-      this.render(scene, camera);
+    this.render(scene, camera);
   }
 }

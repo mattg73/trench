@@ -19,6 +19,7 @@ export default class WebGL {
 
     this.post = new Post();
     this.post.init(this.renderer, this.scene, this.cameras.mainCamera);
+    this.post.addRenderPass(this.scene, this.cameras.mainCamera);
   }
 
   main(){
