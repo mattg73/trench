@@ -6,7 +6,8 @@ class Config{
       filmGrain: false,
       barrelDistortion: false,
       chromaticAberration: false,
-      vignette: false
+      vignette: true,
+      vignetteDarkness: 0.6
     }
   }
 }

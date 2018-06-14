@@ -11,21 +11,22 @@ export default class WebGL {
     this.renderer = new Renderer();
     this.renderer.init();
 
-    this.scene = new Scene();
-    this.scene.init();
+    this.mainScene = new Scene();
+    this.mainScene.init();
 
     this.cameras = new Cameras();
     this.cameras.init();
 
     this.post = new Post();
-    this.post.init(this.renderer, this.scene, this.cameras.mainCamera);
-    this.post.addRenderPass(this.scene, this.cameras.mainCamera);
+    this.post.init(this.renderer, this.mainScene, this.cameras.mainCamera);
+
+    this.post.addRenderPass
   }
 
   main(){
     this.delta = this.clock.getDelta();
 
-    this.scene.update();
+    this.mainScene.update();
 
     this.post.update(this.delta);
     //this.renderer.update(this.scene, this.cameras.mainCamera);
