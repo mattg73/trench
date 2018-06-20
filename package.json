@@ -34,6 +34,7 @@
   "dependencies": {
     "three": "^0.88.0",
     "three-addons": "^1.1.0",
-    "three-effectcomposer-es6": "^0.0.4"
+    "three-effectcomposer-es6": "^0.0.4",
+    "three-gltf-loader": "^1.93.0"
   }
 }

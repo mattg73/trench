@@ -28,8 +28,8 @@ export default class WebGL {
 
     this.mainScene.update();
 
-    this.post.update(this.delta);
-    //this.renderer.update(this.scene, this.cameras.mainCamera);
+    //this.post.update(this.delta);
+    this.renderer.update(this.mainScene, this.cameras.mainCamera);
 
     requestAnimationFrame(() => this.main());
   }
