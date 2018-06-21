@@ -1,6 +1,7 @@
-import { Object3D, Scene } from 'three';
+import { Object3D, SphereGeometry, Mesh, CubeReflectionMapping, EquirectangularReflectionMapping, LinearMipMapLinearFilter} from 'three';
 import Models from './models';
 import Materials from './materials';
+import {Textures, CubeTextures} from './textures';
 import Loader from './loader';
 
 export default class DefaultCube {
@@ -8,49 +9,35 @@ export default class DefaultCube {
 
   }
 
-  init(tempScene){
-    console.log(tempScene)
-    //this.container = new Object3D();
+  init(){
+    this.container = new Object3D();
     this.loaded = false;
 
-    const models = new Models();
-    const materials = new Materials();
 
-    Loader.loadGLTFScene(models.testCube).then(myscene => {
-      
-      
-      tempScene.add(myscene);
-      //resolve(myscene);
+    Loader.loadMesh(Models.ring, Materials.gold, CubeTextures.envMapStudio).then(assets => {
+      const material = assets[1];
+      material.envMap = assets[2];
+      material.envMap.mapping = CubeReflectionMapping;
+      material.envMap.minFilter = LinearMipMapLinearFilter;
+      material.envMap.needsUpdate = true;
+       
+      //const debugGeometry = new SphereGeometry(4, 64, 32);
+
+      this.mesh = new Mesh(assets[0], material);
+      //this.mesh = new Mesh(debugGeometry, material);
+      this.mesh.position.x = 3;
+      this.container.add(this.mesh);
+      this.loaded = true;
     });
-
-    //this.container.add(Loader.loadGLTFScene(models.testCube));
-
-    /*
-    return new Promise((resolve) => {
-      
-      Loader.loadGLTFScene(models.testCube).then(myscene => {
-        resolve(myscene);
-      });
-      
-      
-      loader.loadMesh(models.testCube, materials.gold).then(mesh => {
-        this.mesh = mesh;
-        this.container.add(this.mesh);
-        this.loaded = true;
-        resolve(this.container);
-      });
-      
-
-    });
-    */
+ 
+    
   }
 
   update(){
-    /*
     if(this.loaded){
       this.mesh.rotation.x += 0.01;
-      this.mesh.rotation.y += 0.011;
+      //this.mesh.rotation.y += 0.01;
+      this.mesh.rotation.z += 0.002;
     }
-    */
   }
 }

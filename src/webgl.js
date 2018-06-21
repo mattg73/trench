@@ -11,11 +11,11 @@ export default class WebGL {
     this.renderer = new Renderer();
     this.renderer.init();
 
-    this.mainScene = new Scene();
-    this.mainScene.init();
-
     this.cameras = new Cameras();
     this.cameras.init();
+
+    this.mainScene = new Scene();
+    this.mainScene.init(this.cameras);
 
     this.post = new Post();
     this.post.init(this.renderer, this.mainScene, this.cameras.mainCamera);

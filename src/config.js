@@ -1,13 +1,13 @@
 class Config{
   constructor(){
     this.postEffects = {
-      antialias: false,
+      antialias: true,
       bloom: false,
       filmGrain: false,
       barrelDistortion: false,
       chromaticAberration: false,
       vignette: true,
-      vignetteDarkness: 0.6
+      vignetteDarkness: 0.8
     }
   }
 }
