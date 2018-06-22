@@ -3285,11 +3285,11 @@ tar@^2.2.1:
     fstream "^1.0.2"
     inherits "2"
 
-three-addons@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/three-addons/-/three-addons-1.1.0.tgz#e4c4b7e673f658434b0b8823914d4b057c7d890a"
+three-addons@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/three-addons/-/three-addons-1.2.0.tgz#a36293e2489bdda08be8efc31291485b41de1560"
   dependencies:
-    three "^0.87.1"
+    three "^0.92.0"
 
 three-effectcomposer-es6@^0.0.4:
   version "0.0.4"
@@ -3305,9 +3305,9 @@ three@>=0.89.0, three@^0.93.0:
   version "0.93.0"
   resolved "https://registry.yarnpkg.com/three/-/three-0.93.0.tgz#3fd6c367ef4554abbb6e16ad69936283e895c123"
 
-three@^0.87.1:
-  version "0.87.1"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.87.1.tgz#466a34edc4543459ced9b9d7d276b65216fe2ba8"
+three@^0.92.0:
+  version "0.92.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.92.0.tgz#8d3d1f5af890e62da7f4cb45d20c09fa51057dcd"
 
 thunky@^0.1.0:
   version "0.1.0"

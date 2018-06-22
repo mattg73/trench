@@ -16,13 +16,12 @@ export default class Loader {
         
         // called when the resource is loaded
         function ( texture ) {
-          console.log('loaded');
           resolve(texture);
         },
   
         // called when loading is in progresses
         function ( xhr ) {
-          console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+          //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         },
   
         // called when loading has errors
@@ -42,13 +41,12 @@ export default class Loader {
         
         // called when the resource is loaded
         function ( texture ) {
-          console.log('loaded');
           resolve(texture);
         },
   
         // called when loading is in progresses
         function ( xhr ) {
-          console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+          //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         },
   
         // called when loading has errors
@@ -68,13 +66,12 @@ export default class Loader {
         
         // called when the resource is loaded
         function ( data ) {
-          console.log('loaded');
           resolve(data.scene);
         },
   
         // called when loading is in progresses
         function ( xhr ) {
-          console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+          //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         },
   
         // called when loading has errors
@@ -106,13 +103,12 @@ export default class Loader {
         
         // called when the resource is loaded
         function ( data ) {
-          console.log('loaded');
           resolve(data.scene.children[0].geometry);
         },
   
         // called when loading is in progresses
         function ( xhr ) {
-          console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+          //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
         },
   
         // called when loading has errors

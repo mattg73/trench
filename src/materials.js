@@ -1,5 +1,6 @@
 import {MeshStandardMaterial, ShaderMaterial, Color} from 'three';
-import * as gemShader from './gem.glsl';
+import * as gemFrontShader from './gemFront.glsl';
+import * as gemBackShader from './gemBack.glsl';
 
 let Materials;
 const goldParams = {
@@ -17,22 +18,38 @@ const diamondParams = {
   refractionRatio: 1/2.2
 }
 
-const shaderDiamondParams = {
+const shaderDiamondFrontParams = {
   uniforms: {
-    mRefractionRatio: { type: "f", value: 1.02 },
+    mRefractionRatio: { type: "f", value: 1/2.2 },
+		mFresnelBias: { type: "f", value: 0.3 },
+		mFresnelPower: { type: "f", value: 2.0 },
+    mFresnelScale: { type: "f", value: 1.4 },
+    uFaceDirection: { type: "f", value: 1.0 },
+    tCube: { type: "t", value: null },
+    uColor: {type: "c", value: new Color('rgb(255, 255, 255)')}
+  },
+  vertexShader: gemFrontShader.vertexShader,
+  fragmentShader: gemFrontShader.fragmentShader,
+}
+
+const shaderDiamondBackParams = {
+  uniforms: {
+    mRefractionRatio: { type: "f", value: 1/2.2 },
 		mFresnelBias: { type: "f", value: 0.1 },
 		mFresnelPower: { type: "f", value: 2.0 },
-		mFresnelScale: { type: "f", value: 1.0 },
+    mFresnelScale: { type: "f", value: 1.0 },
+    uFaceDirection: { type: "f", value: 1.0 },
     tCube: { type: "t", value: null },
-    uColor: {type: "c", value: new Color('rgb(160, 50, 50)')}
+    uColor: {type: "c", value: new Color('rgb(255, 255, 255)')}
   },
-  vertexShader: gemShader.vertexShader,
-  fragmentShader: gemShader.fragmentShader
+  vertexShader: gemBackShader.vertexShader,
+  fragmentShader: gemBackShader.fragmentShader
 }
 
 
 export default Materials = {
   gold: new MeshStandardMaterial(goldParams),
   diamond: new MeshStandardMaterial(diamondParams),
-  shaderDiamond: new ShaderMaterial(shaderDiamondParams)
+  shaderDiamondFront: new ShaderMaterial(shaderDiamondFrontParams),
+  shaderDiamondBack: new ShaderMaterial(shaderDiamondBackParams)
 }

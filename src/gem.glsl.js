@@ -3,6 +3,7 @@ uniform float mRefractionRatio;
 uniform float mFresnelBias;
 uniform float mFresnelScale;
 uniform float mFresnelPower;
+uniform float uFaceDirection;
 
 varying vec3 vReflect;
 varying vec3 vRefract[3];
@@ -12,7 +13,7 @@ void main()	{
   vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
   vec4 worldPosition = modelMatrix * vec4( position, 1.0 );
 
-  vec3 worldNormal = normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
+  vec3 worldNormal = uFaceDirection * normalize( mat3( modelMatrix[0].xyz, modelMatrix[1].xyz, modelMatrix[2].xyz ) * normal );
 
   vec3 I = worldPosition.xyz - cameraPosition;
 
