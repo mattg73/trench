@@ -45,7 +45,6 @@ void main()	{
   refractedColor.a = 0.00;
 
   vec4 tintedColor = refractedColor * vec4(uColor, 1.0);
-  //vec4 tintedColor = vec4(0.0);
 
   gl_FragColor = mix( tintedColor, reflectedColor, clamp( vReflectionFactor, 0.0, 1.0 ) );
 }

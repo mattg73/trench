@@ -1,7 +1,17 @@
+const texturePath = './assets/textures/';
 
 export let Textures = {
   envMapStudio: {
-    url: './assets/textures/envMapPanorama.png'
+    url: texturePath+'envMapPanorama.png'
+  },
+  squareRingBaseColor: {
+    url: texturePath+'SquareStone_Base_Color.png'
+  },
+  squareRingRoughness: {
+    url: texturePath+'SquareStone_Roughness.png'
+  },
+  squareRingNormal: {
+    url: texturePath+'SquareStone_Normal_DirectX.png'
   }
 };
 

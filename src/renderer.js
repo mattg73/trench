@@ -1,6 +1,6 @@
 import {WebGLRenderer} from 'three';
 
-export default class Renderer extends WebGLRenderer{
+class Renderer extends WebGLRenderer{
   constructor(){
     super({antialias:true});
   }
@@ -14,3 +14,4 @@ export default class Renderer extends WebGLRenderer{
     this.render(scene, camera);
   }
 }
+export default new Renderer();

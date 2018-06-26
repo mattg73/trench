@@ -1,8 +1,10 @@
 import { Scene, CubeReflectionMapping, SphereBufferGeometry, MeshStandardMaterial, Mesh } from 'three';
 import Loader from './loader';
 import Lights from './lights';
-import DefaultCube from './default-cube';
+import Bee from './bee';
+import Ring from './ring';
 import Gem from './gem';
+import SquareRing from './squareRing';
 import {CubeTextures} from './textures';
 
 export class MainScene extends Scene {
@@ -10,32 +12,39 @@ export class MainScene extends Scene {
     super();
   }
 
-  init(sceneCameras){
+  init(){
 
+    // Environment map
     Loader.loadCubeTexture(CubeTextures.envMapStudio).then(asset => {
       const envMap = asset;
       envMap.mapping = CubeReflectionMapping
       //this.background = asset;
     });
 
+    // Lights
     this.lights = new Lights();
     this.lights.init();
     //this.add(this.lights.sun);
 
 
+    // Objects
+    this.bee = new Bee();
+    this.bee.init();
+    this.add(this.bee.container);
 
-    this.cube = new DefaultCube();
-    this.cube.init();
-    this.add(this.cube.container);
+    this.ring = new Ring();
+    this.ring.init();
+    this.add(this.ring.container);
 
-    //this.gem = new Gem();
-    //this.gem.init(sceneCameras);
-    //this.add(this.gem.container);
+    this.squareRing = new SquareRing();
+    this.squareRing.init();
+    this.add(this.squareRing.container);
   }
 
   update(){
-    this.cube.update();
-    //this.gem.update();
+    this.bee.update();
+    this.ring.update();
+    this.squareRing.update();
   }
 }
 
@@ -44,9 +53,9 @@ export class GemBackFacingScene extends Scene {
         super();
     }
 
-    init(sceneCameras){
+    init(){
         this.gem = new Gem(-1);
-        this.gem.init(sceneCameras);
+        this.gem.init();
         this.add(this.gem.container);
     }
 
@@ -60,9 +69,9 @@ export class GemFrontFacingScene extends Scene {
         super();
     }
 
-    init(sceneCameras){
+    init(){
         this.gem = new Gem(1);
-        this.gem.init(sceneCameras);
+        this.gem.init();
         this.add(this.gem.container);
     }
 

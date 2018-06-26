@@ -1,16 +1,17 @@
 import {WebGLRenderTarget, LinearFilter, RGBAFormat, Vector2, ShaderMaterial, UniformsUtils, AdditiveBlending} from 'three';
 import {FXAAShader, VignetteShader, BloomPass, ConvolutionShader} from 'three-addons';
 import EffectComposer, {RenderPass, ShaderPass, CopyShader} from 'three-effectcomposer-es6';
+import Renderer from './renderer';
+import Cameras from './cameras';
 import * as CompositeShader from './composite.glsl';
 //import UnrealBloomPass from './libs/postprocessing/UnrealBloomPass';
 import config from './config';
 
 
-export default class Post{
-  init(renderer, mainScene, gemBackFacingScene, gemFrontFacingScene, mainCamera){
+class Post{
+  init(mainScene, gemBackFacingScene, gemFrontFacingScene){
 
-    this.renderer = renderer;
-    this.renderer.autoClear = false;
+    Renderer.autoClear = false;
 
     // Parameters
     this.renderTargetParameters = { minFilter: LinearFilter, magFilter: LinearFilter, format: RGBAFormat, stencilBuffer: false };
@@ -22,18 +23,18 @@ export default class Post{
     this.renderTargetMain = new WebGLRenderTarget( window.innerWidth, window.innerHeight, this.renderTargetParameters );
 
     // Composers
-    this.environmentComposer = new EffectComposer(renderer, this.renderTargetEnvironment);
-    this.gemBackComposer = new EffectComposer(renderer, this.renderTargetGemBack)
-    this.gemFrontComposer = new EffectComposer(renderer, this.renderTargetGemFront)
-    this.mainComposer = new EffectComposer(renderer, this.renderTargetMain);
+    this.environmentComposer = new EffectComposer(Renderer, this.renderTargetEnvironment);
+    this.gemBackComposer = new EffectComposer(Renderer, this.renderTargetGemBack)
+    this.gemFrontComposer = new EffectComposer(Renderer, this.renderTargetGemFront)
+    this.mainComposer = new EffectComposer(Renderer, this.renderTargetMain);
 
     // Init Passes
     this.copyPass = new ShaderPass(CopyShader);
     this.copyPass.renderToScreen = true;
 
-    this.environmentRenderPass = new RenderPass(mainScene, mainCamera);
-    this.gemBackRenderPass = new RenderPass(gemBackFacingScene, mainCamera);
-    this.gemFrontRenderPass = new RenderPass(gemFrontFacingScene, mainCamera);
+    this.environmentRenderPass = new RenderPass(mainScene, Cameras.mainCamera);
+    this.gemBackRenderPass = new RenderPass(gemBackFacingScene, Cameras.mainCamera);
+    this.gemFrontRenderPass = new RenderPass(gemFrontFacingScene, Cameras.mainCamera);
 
     // Init Composite Uniforms
     const compositeParams = {
@@ -119,3 +120,4 @@ export default class Post{
     this.mainComposer.render(delta);
   }
 }
+export default new Post();

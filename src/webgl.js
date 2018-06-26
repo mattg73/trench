@@ -1,30 +1,29 @@
 import { Clock } from 'three';
+import * as dat from 'dat.gui';
 import Renderer from './renderer';
-import {MainScene, GemBackFacingScene, GemFrontFacingScene} from './scenes';
 import Cameras from './cameras';
+import {MainScene, GemBackFacingScene, GemFrontFacingScene} from './scenes';
 import Post from './post';
 
-export default class WebGL {
+class WebGL {
   init(){
     this.clock = new Clock();
 
-    this.renderer = new Renderer();
-    this.renderer.init();
+    this.gui = new dat.GUI();
 
-    this.cameras = new Cameras();
-    this.cameras.init();
+    Renderer.init();
+    Cameras.init();
 
     this.mainScene = new MainScene();
-    this.mainScene.init(this.cameras);
+    this.mainScene.init();
 
     this.gemBackFacingScene = new GemBackFacingScene();
-    this.gemBackFacingScene.init(this.cameras);
+    this.gemBackFacingScene.init();
 
     this.gemFrontFacingScene = new GemFrontFacingScene();
-    this.gemFrontFacingScene.init(this.cameras);
+    this.gemFrontFacingScene.init();
 
-    this.post = new Post();
-    this.post.init(this.renderer, this.mainScene, this.gemBackFacingScene, this.gemFrontFacingScene, this.cameras.mainCamera);
+    Post.init(this.mainScene, this.gemBackFacingScene, this.gemFrontFacingScene);
   }
 
   main(){
@@ -34,10 +33,11 @@ export default class WebGL {
     this.gemBackFacingScene.update();
     this.gemFrontFacingScene.update();
 
-    this.post.update(this.delta);
+    Post.update(this.delta);
     //this.renderer.update(this.mainScene, this.cameras.mainCamera);
     //this.renderer.update(this.gemBackFacingScene, this.cameras.mainCamera);
 
     requestAnimationFrame(() => this.main());
   }
 }
+export default new WebGL();

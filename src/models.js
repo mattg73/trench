@@ -1,12 +1,25 @@
+const modelPath = './assets/models/';
+
 let Models;
 export default Models = {
   testCube: {
-    url: './assets/models/cube.glb'
+    url: modelPath+'cube.glb',
+    data: null
   },
   gem: {
-    url: './assets/models/gem.glb'
+    url: modelPath+'gem.glb',
+    data: null
   },
   ring: {
-    url: './assets/models/ring.glb'
+    url: modelPath+'ring.glb',
+    data: null
+  },
+  bee: {
+    url: modelPath+'bee.glb',
+    data: null
+  },
+  squareRing: {
+    url: modelPath+'squareRing_04.glb',
+    data: null
   }
 };
