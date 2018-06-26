@@ -21,5 +21,9 @@ export default Models = {
   squareRing: {
     url: modelPath+'squareRing_04.glb',
     data: null
+  },
+  gemRing: {
+    url: modelPath+'gem-ring.glb',
+    data: null
   }
 };

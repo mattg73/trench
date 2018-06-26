@@ -6,16 +6,33 @@ export default class Loader {
     
   };
 
-  static loadCubeTexture(asset){
+  static loadFromQueue(queue){
+    const promises = [];
+
+    for(var i=0; i<queue.modelLoad.length; i++){
+      promises.push(this.loadGLTFScene(queue.modelLoad[i]));
+    }
+    for(var i=0; i<queue.textureLoad.length; i++){
+      promises.push(this.loadTexture(queue.textureLoad[i]));
+    }
+    for(var i=0; i<queue.cubeTextureLoad.length; i++){
+      promises.push(this.loadCubeTexture(queue.cubeTextureLoad[i]));
+    }
+
+    return Promise.all(promises).then(result => {
+      return result;
+    });
+  }
+
+  static loadTexture(asset){
     return new Promise((resolve, reject) => {
-      const loader = new CubeTextureLoader();
-      loader.setPath('./assets/textures/env-maps/')
-      loader.load(
+      new TextureLoader().load(
         // resource URL
-        asset.urlArray,
+        asset.url,
         
         // called when the resource is loaded
         function ( texture ) {
+          asset.data = texture;
           resolve(texture);
         },
   
@@ -33,14 +50,17 @@ export default class Loader {
     });
   }
 
-  static loadTexture(asset){
+  static loadCubeTexture(asset){
     return new Promise((resolve, reject) => {
-      new TextureLoader().load(
+      const loader = new CubeTextureLoader();
+      loader.setPath('./assets/textures/env-maps/')
+      loader.load(
         // resource URL
-        asset.url,
+        asset.urlArray,
         
         // called when the resource is loaded
         function ( texture ) {
+          asset.data = texture;
           resolve(texture);
         },
   
@@ -66,6 +86,7 @@ export default class Loader {
         
         // called when the resource is loaded
         function ( data ) {
+          asset.data = data;
           resolve(data.scene);
         },
   
@@ -83,10 +104,11 @@ export default class Loader {
     });
   }
 
+  /*
   static loadMesh(parameters) {
     const promises = [];
 
-    promises.push(this.loadModel(parameters.model));
+    promises.push(this.loadGLTFScene(parameters.model));
     promises.push(this.loadMaterial(parameters.material));
     promises.push(this.loadCubeTexture(parameters.envMap));
     if(parameters.map) promises.push(this.loadTexture(parameters.map));
@@ -97,31 +119,7 @@ export default class Loader {
       return result;
     });
   }
-
-  static loadModel(asset){
-    return new Promise((resolve, reject) => {
-      new GLTFLoader().load(
-        // resource URL
-        asset.url,
-        
-        // called when the resource is loaded
-        function ( data ) {
-          resolve(data.scene.children[0].geometry);
-        },
-  
-        // called when loading is in progresses
-        function ( xhr ) {
-          //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
-        },
-  
-        // called when loading has errors
-        function (error) {
-          console.log( 'An error happened' );
-          reject(error);
-        }
-      );
-    });
-  }
+  */
 
   static loadMaterial(material){
     //do texture loading stuff here

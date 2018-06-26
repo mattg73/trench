@@ -5,6 +5,7 @@ import Bee from './bee';
 import Ring from './ring';
 import Gem from './gem';
 import SquareRing from './squareRing';
+import GemRing from './gemRing';
 import {CubeTextures} from './textures';
 
 export class MainScene extends Scene {
@@ -15,16 +16,15 @@ export class MainScene extends Scene {
   init(){
 
     // Environment map
-    Loader.loadCubeTexture(CubeTextures.envMapStudio).then(asset => {
-      const envMap = asset;
-      envMap.mapping = CubeReflectionMapping
-      //this.background = asset;
-    });
+    const envMap = CubeTextures.envMapStudio.data;
+    envMap.mapping = CubeReflectionMapping
+    this.background = envMap;
 
     // Lights
     this.lights = new Lights();
     this.lights.init();
     //this.add(this.lights.sun);
+    this.add(this.lights.ambientLight)
 
 
     // Objects
@@ -35,16 +35,21 @@ export class MainScene extends Scene {
     this.ring = new Ring();
     this.ring.init();
     this.add(this.ring.container);
-
+    
     this.squareRing = new SquareRing();
     this.squareRing.init();
     this.add(this.squareRing.container);
+
+    this.gemRing = new GemRing();
+    this.gemRing.init();
+    this.add(this.gemRing.container);
   }
 
   update(){
     this.bee.update();
     this.ring.update();
     this.squareRing.update();
+    this.gemRing.update();
   }
 }
 

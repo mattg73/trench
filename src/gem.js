@@ -12,54 +12,34 @@ export default class Gem {
 
   init(){
     this.container = new Object3D();
-    this.loaded = false;
+
+    this.mesh = (Models.gem.data.scene.children[0]).clone();
 
     if (this.facingDirection === 1){
-      const loadParameters = {
-        model: Models.gem,
-        material: Materials.shaderDiamondFront,
-        envMap: CubeTextures.envMapStudio
-      }
-  
-      Loader.loadMesh(loadParameters).then(assets => {
-        const material = assets[1];
-        material.uniforms.tCube = Cameras.cubeCamera;
-        material.uniforms.uFaceDirection.value = this.facingDirection;
-        material.side = FrontSide;
-         
-        this.mesh = new Mesh(assets[0], material);
-        this.mesh.position.x = -5;
-        this.mesh.scale.multiplyScalar(3);
-        this.container.add(this.mesh);
-        this.loaded = true;
-      });
-      
-    }else{
-      const loadParameters = {
-        model: Models.gem,
-        material: Materials.shaderDiamondBack,
-        envMap: CubeTextures.envMapStudio
-      }
-  
-      Loader.loadMesh(loadParameters).then(assets => {
-        const material = assets[1];
-        material.uniforms.tCube = Cameras.cubeCamera;
-        material.uniforms.uFaceDirection.value = this.facingDirection;
-        material.side = BackSide;
+      this.mesh.material = Materials.shaderDiamondFront;
+      this.mesh.material.uniforms.tCube = Cameras.cubeCamera;
+      this.mesh.material.uniforms.uFaceDirection.value = this.facingDirection;
+      this.mesh.material.side = FrontSide;
+        
+      this.mesh.position.x = -5;
+      this.mesh.scale.multiplyScalar(3);
 
-        this.mesh = new Mesh(assets[0], material);
-        this.mesh.position.x = -5;
-        this.mesh.scale.multiplyScalar(3);
-        this.container.add(this.mesh);
-        this.loaded = true;
-      });
+      this.container.add(this.mesh);
+    }else{
+      this.mesh.material = Materials.shaderDiamondBack;
+      this.mesh.material.uniforms.tCube = Cameras.cubeCamera;
+      this.mesh.material.uniforms.uFaceDirection.value = this.facingDirection;
+      this.mesh.material.side = BackSide;
+        
+      this.mesh.position.x = -5;
+      this.mesh.scale.multiplyScalar(3);
+
+      this.container.add(this.mesh);
     }
   }
 
   update(){
-    if(this.loaded){
-      this.mesh.rotation.x -= 0.005;
-      this.mesh.rotation.y -= 0.02;
-    }
+    this.mesh.rotation.x -= 0.005;
+    this.mesh.rotation.y -= 0.02;
   }
 }

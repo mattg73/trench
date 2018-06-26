@@ -1,56 +1,60 @@
-import { Object3D, Mesh, CubeReflectionMapping, LinearMipMapLinearFilter} from 'three';
+import { Object3D, Mesh, BackSide, FrontSide, CubeReflectionMapping, LinearMipMapLinearFilter} from 'three';
+import Cameras from './cameras'; 
 import Models from './models';
 import Materials from './materials';
 import {Textures, CubeTextures} from './textures';
-import Loader from './loader';
 
 export default class GemRing {
   init(){
     this.container = new Object3D();
-    this.loaded = false;
+   
+    // Metal
+    this.meshMetal = (Models.gemRing.data.scene.children[2]).clone();
 
-    const loadParameters = {
-      model: Models.squareRing,
-      material: Materials.squareRing,
-      envMap: CubeTextures.envMapStudio,
-      map: Textures.squareRingBaseColor,
-      roughnessMap: Textures.squareRingRoughness,
-      normalMap: Textures.squareRingNormal
-    }
+    this.meshMetal.material = Materials.gemRingMetal;
+    this.meshMetal.material.envMap = CubeTextures.envMapStudio.data;
 
-    Loader.loadMesh(loadParameters).then(assets => {
-      const material = assets[1];
-      material.envMap = assets[2];
-      material.envMap.mapping = CubeReflectionMapping;
-      material.envMap.minFilter = LinearMipMapLinearFilter;
-      material.envMap.needsUpdate = true;
+    this.meshMetal.material.map = Textures.gemRingBaseColor.data;
+    this.meshMetal.material.map.flipY = false;
+    this.meshMetal.material.map.anisotropy = 16;
 
-      material.normalScale.x = 0;
-      material.map = assets[3];
-      material.map.flipY = false;
-      material.map.anisotropy = 16;
+    this.meshMetal.material.roughnessMap = Textures.gemRingRoughness.data;
+    this.meshMetal.material.roughnessMap.flipY = false;
+    this.meshMetal.material.roughnessMap.anisotropy = 16;
 
-      material.roughnessMap = assets[4];
-      material.roughnessMap.flipY = false;
-      material.roughnessMap.anisotropy = 16;
+    this.meshMetal.material.normalMap = Textures.gemRingNormal.data;
+    this.meshMetal.material.normalMap.flipY = false;
+    this.meshMetal.material.normalMap.anisotropy = 16;
 
-      material.normalMap = assets[5];
-      material.normalMap.flipY = false;
-      material.normalMap.anisotropy = 16;
+    // Pearl
+    this.meshPearl = (Models.gemRing.data.scene.children[0]).clone();
 
-      this.mesh = new Mesh(assets[0], material);
-      this.mesh.position.x = 0;
-      this.mesh.scale.multiplyScalar(1.5);
-      this.container.add(this.mesh);
-      this.loaded = true;
-    });
+    this.meshPearl.material = Materials.pearl;
+    this.meshPearl.material.envMap = CubeTextures.envMapStudio.data;
+    this.meshPearl.material.envMapIntensity = 1;
+    this.meshPearl.material.reflectivity = 4;
+    this.meshPearl.material.needsUpdate = true;
+
+    // Gem
+    this.meshGem = (Models.gemRing.data.scene.children[1]).clone();
+
+    this.meshGem.material = Materials.shaderSaphireBack;
+    this.meshGem.material.uniforms.tCube = Cameras.cubeCamera;
+    this.meshGem.material.uniforms.uFaceDirection.value = this.facingDirection;
+    this.meshGem.material.side = BackSide;
+      
+    this.container.add(this.meshMetal);
+    this.container.add(this.meshPearl);
+    this.container.add(this.meshGem);
+
+    this.container.position.y = 4;
+    this.container.scale.multiplyScalar(1.6);
+    
   }
 
   update(){
-    if(this.loaded){
-      this.mesh.rotation.x += 0.01;
-      this.mesh.rotation.y += 0.01;
-      this.mesh.rotation.z += 0.002;
-    }
+    this.container.rotation.x += 0.01;
+    this.container.rotation.y += 0.01;
+    this.container.rotation.z += 0.002;
   }
 }
