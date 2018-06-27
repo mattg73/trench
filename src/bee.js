@@ -1,4 +1,5 @@
 import { Object3D} from 'three';
+import {mainScene} from './scenes';
 import Models from './models';
 import Materials from './materials';
 import {CubeTextures} from './textures';
@@ -11,9 +12,10 @@ export default class Bee {
     this.mesh.material = Materials.gold;
     this.mesh.material.envMap = CubeTextures.envMapStudio.data;
     this.mesh.position.x = 5;
-    this.mesh.scale.multiplyScalar(3);
+    this.mesh.scale.multiplyScalar(2);
 
     this.container.add(this.mesh);
+    mainScene.add(this.container);
   }
 
   update(){

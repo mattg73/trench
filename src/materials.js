@@ -27,7 +27,7 @@ const diamondParams = {
 }
 
 const saphireParams = {
-  color: new Color('rgb(255, 0, 255)'),
+  color: new Color('rgb(40, 40, 255)'),
   ior: 2.2
 }
 
@@ -40,8 +40,6 @@ const gemRingMetalParams = {
   roughness: 1,
   metalness: 1,
 }
-
-
 
 const shaderDiamondFrontParams = {
   uniforms: {
@@ -71,6 +69,20 @@ const shaderDiamondBackParams = {
   fragmentShader: gemBackShader.fragmentShader
 }
 
+const shaderSaphireFrontParams = {
+  uniforms: {
+    mRefractionRatio: { type: "f", value: 1/saphireParams.ior },
+		mFresnelBias: { type: "f", value: 0.1 },
+		mFresnelPower: { type: "f", value: 2.0 },
+    mFresnelScale: { type: "f", value: 1.0 },
+    uFaceDirection: { type: "f", value: 1.0 },
+    tCube: { type: "t", value: null },
+    uColor: {type: "c", value: saphireParams.color}
+  },
+  vertexShader: gemFrontShader.vertexShader,
+  fragmentShader: gemFrontShader.fragmentShader
+}
+
 const shaderSaphireBackParams = {
   uniforms: {
     mRefractionRatio: { type: "f", value: 1/saphireParams.ior },
@@ -94,5 +106,6 @@ export default Materials = {
   gemRingMetal: new MeshStandardMaterial(gemRingMetalParams),
   shaderDiamondFront: new ShaderMaterial(shaderDiamondFrontParams),
   shaderDiamondBack: new ShaderMaterial(shaderDiamondBackParams),
+  shaderSaphireFront: new ShaderMaterial(shaderSaphireFrontParams),
   shaderSaphireBack: new ShaderMaterial(shaderSaphireBackParams)
 }

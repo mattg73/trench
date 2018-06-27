@@ -1,4 +1,5 @@
 import { Object3D} from 'three';
+import {mainScene} from './scenes';
 import Models from './models';
 import Materials from './materials';
 import {Textures, CubeTextures} from './textures';
@@ -24,10 +25,11 @@ export default class SquareRing {
     this.mesh.material.normalMap.flipY = false;
     this.mesh.material.normalMap.anisotropy = 16;
 
-    this.mesh.position.x = 0;
-    this.mesh.scale.multiplyScalar(1.5);
+    this.mesh.position.y = 4;
+    this.mesh.scale.multiplyScalar(1);
 
     this.container.add(this.mesh);
+    mainScene.add(this.container);
   }
 
   update(){

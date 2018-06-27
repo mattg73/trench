@@ -1,4 +1,4 @@
-import {WebGLRenderer} from 'three';
+import {WebGLRenderer, Color} from 'three';
 
 class Renderer extends WebGLRenderer{
   constructor(){

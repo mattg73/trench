@@ -1,4 +1,5 @@
 import { Object3D, Mesh, BackSide, FrontSide, CubeReflectionMapping, LinearMipMapLinearFilter} from 'three';
+import {mainScene, gemBackFacingScene} from './scenes';
 import Cameras from './cameras'; 
 import Models from './models';
 import Materials from './materials';
@@ -36,19 +37,32 @@ export default class GemRing {
     this.meshPearl.material.needsUpdate = true;
 
     // Gem
-    this.meshGem = (Models.gemRing.data.scene.children[1]).clone();
+    this.meshGemFront = (Models.gemRing.data.scene.children[1]).clone();
 
-    this.meshGem.material = Materials.shaderSaphireBack;
-    this.meshGem.material.uniforms.tCube = Cameras.cubeCamera;
-    this.meshGem.material.uniforms.uFaceDirection.value = this.facingDirection;
-    this.meshGem.material.side = BackSide;
+    this.meshGemFront.material = Materials.shaderSaphireFront;
+    this.meshGemFront.material.uniforms.tCube = Cameras.cubeCamera;
+    this.meshGemFront.material.uniforms.uFaceDirection.value = 1;
+    this.meshGemFront.material.side = FrontSide;
+
+    this.meshGemBack = (Models.gemRing.data.scene.children[1]).clone();
+
+    this.meshGemBack.material = Materials.shaderSaphireBack;
+    this.meshGemBack.material.uniforms.tCube = Cameras.cubeCamera;
+    this.meshGemBack.material.uniforms.uFaceDirection.value = -1;
+    this.meshGemBack.material.side = BackSide;
       
     this.container.add(this.meshMetal);
     this.container.add(this.meshPearl);
-    this.container.add(this.meshGem);
+    this.container.add(this.meshGemFront);
 
-    this.container.position.y = 4;
+    this.container.position.y = 0;
+    this.meshGemBack.position.y = 0;
+
     this.container.scale.multiplyScalar(1.6);
+    this.meshGemBack.scale.multiplyScalar(1.6);
+
+    mainScene.add(this.container);
+    gemBackFacingScene.add(this.meshGemBack);
     
   }
 
@@ -56,5 +70,9 @@ export default class GemRing {
     this.container.rotation.x += 0.01;
     this.container.rotation.y += 0.01;
     this.container.rotation.z += 0.002;
+
+    this.meshGemBack.rotation.x += 0.01;
+    this.meshGemBack.rotation.y += 0.01;
+    this.meshGemBack.rotation.z += 0.002;
   }
 }

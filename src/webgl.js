@@ -4,7 +4,12 @@ import Loader from './loader';
 import LoadQueues from './load-queues';
 import Renderer from './renderer';
 import Cameras from './cameras';
-import {MainScene, GemBackFacingScene, GemFrontFacingScene} from './scenes';
+import {mainScene, gemBackFacingScene} from './scenes';
+import Bee from './bee';
+import Ring from './ring';
+import Gem from './gem';
+import SquareRing from './squareRing';
+import GemRing from './gemRing';
 import Post from './post';
 
 class WebGL {
@@ -19,16 +24,26 @@ class WebGL {
       Renderer.init();
       Cameras.init();
 
-      this.mainScene = new MainScene();
-      this.mainScene.init();
+      mainScene.init();
+      gemBackFacingScene.init();
+
+          // Objects
+      this.bee = new Bee();
+      this.bee.init();
+
+      this.ring = new Ring();
+      this.ring.init();
+
+      this.gem = new Gem();
+      this.gem.init();
+      
+      this.squareRing = new SquareRing();
+      this.squareRing.init();
+
+      this.gemRing = new GemRing();
+      this.gemRing.init();
   
-      this.gemBackFacingScene = new GemBackFacingScene();
-      this.gemBackFacingScene.init();
-  
-      this.gemFrontFacingScene = new GemFrontFacingScene();
-      this.gemFrontFacingScene.init();
-  
-      Post.init(this.mainScene, this.gemBackFacingScene, this.gemFrontFacingScene);
+      Post.init();
 
       this.loaded = true;
     });
@@ -38,9 +53,14 @@ class WebGL {
     if(this.loaded){
       this.delta = this.clock.getDelta();
 
-      this.mainScene.update();
-      this.gemBackFacingScene.update();
-      this.gemFrontFacingScene.update();
+      mainScene.update();
+      gemBackFacingScene.update();
+      
+      this.bee.update();
+      this.ring.update();
+      this.gem.update();
+      this.squareRing.update();
+      this.gemRing.update();
   
       Post.update(this.delta);
       //this.renderer.update(this.mainScene, this.cameras.mainCamera);

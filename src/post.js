@@ -3,15 +3,18 @@ import {FXAAShader, VignetteShader, BloomPass, ConvolutionShader} from 'three-ad
 import EffectComposer, {RenderPass, ShaderPass, CopyShader} from 'three-effectcomposer-es6';
 import Renderer from './renderer';
 import Cameras from './cameras';
+import {mainScene, gemBackFacingScene, gemFrontFacingScene} from './scenes'; 
 import * as CompositeShader from './composite.glsl';
 //import UnrealBloomPass from './libs/postprocessing/UnrealBloomPass';
 import config from './config';
 
 
 class Post{
-  init(mainScene, gemBackFacingScene, gemFrontFacingScene){
+  init(){
 
     Renderer.autoClear = false;
+
+    // Compositing
 
     // Parameters
     this.renderTargetParameters = { minFilter: LinearFilter, magFilter: LinearFilter, format: RGBAFormat, stencilBuffer: false };
@@ -19,13 +22,11 @@ class Post{
     // Render Targets
     this.renderTargetEnvironment = new WebGLRenderTarget( window.innerWidth, window.innerHeight, this.renderTargetParameters );
     this.renderTargetGemBack = new WebGLRenderTarget( window.innerWidth, window.innerHeight, this.renderTargetParameters );
-    this.renderTargetGemFront = new WebGLRenderTarget( window.innerWidth, window.innerHeight, this.renderTargetParameters );
     this.renderTargetMain = new WebGLRenderTarget( window.innerWidth, window.innerHeight, this.renderTargetParameters );
 
     // Composers
     this.environmentComposer = new EffectComposer(Renderer, this.renderTargetEnvironment);
     this.gemBackComposer = new EffectComposer(Renderer, this.renderTargetGemBack)
-    this.gemFrontComposer = new EffectComposer(Renderer, this.renderTargetGemFront)
     this.mainComposer = new EffectComposer(Renderer, this.renderTargetMain);
 
     // Init Passes
@@ -34,14 +35,12 @@ class Post{
 
     this.environmentRenderPass = new RenderPass(mainScene, Cameras.mainCamera);
     this.gemBackRenderPass = new RenderPass(gemBackFacingScene, Cameras.mainCamera);
-    this.gemFrontRenderPass = new RenderPass(gemFrontFacingScene, Cameras.mainCamera);
 
     // Init Composite Uniforms
     const compositeParams = {
       uniforms: {
         tEnvironment: { type: "t", value: this.environmentComposer.renderTarget2 },
-        tGemBackFacing: { type: "t", value: this.gemBackComposer.renderTarget2 },
-        tGemFrontFacing: { type: "t", value: this.gemFrontComposer.renderTarget2 },
+        tGemBackFacing: { type: "t", value: this.gemBackComposer.renderTarget2 }
       },
       vertexShader: CompositeShader.vertexShader,
       fragmentShader: CompositeShader.fragmentShader
@@ -55,20 +54,17 @@ class Post{
     this.environmentComposer.addPass(this.copyPass);
     this.gemBackComposer.addPass(this.gemBackRenderPass);
     this.gemBackComposer.addPass(this.copyPass);
-    this.gemFrontComposer.addPass(this.gemFrontRenderPass);
-    this.gemFrontComposer.addPass(this.copyPass);
 
     this.mainComposer.addPass(this.compositePass);
-    this.mainComposer.addPass(this.copyPass);
 
 
     // Post-Processing Effects
 
     // Anti-aliasing
     if(config.postEffects.antialias === true){
-      //this.FXAAShader = new ShaderPass(FXAAShader);
-      //this.FXAAShader.uniforms.resolution.value = new Vector2(1 / window.innerWidth, 1 / window.innerHeight);
-      //this.mainComposer.addPass(this.FXAAShader);
+      this.FXAAShader = new ShaderPass(FXAAShader);
+      this.FXAAShader.uniforms.resolution.value = new Vector2(1 / window.innerWidth, 1 / window.innerHeight);
+      this.mainComposer.addPass(this.FXAAShader);
     }
 
     // AO
@@ -82,16 +78,15 @@ class Post{
     // Eye Adaption
 
     // Bloom
-    /*
     if(config.postEffects.bloom === true){
       this.bloomPass = new ShaderPass(BloomPass);
       //this.bloomPass.uniforms.
 
-      console.log(this.bloomPass.uniforms);
+      console.log(this.bloomPass);
 
       this.mainComposer.addPass( this.bloomPass );
     }
-    */
+  
 
     // Color Grade
 
@@ -101,14 +96,14 @@ class Post{
 
     // Vignette
     if(config.postEffects.vignette === true){
-      //this.vignetteShader = new ShaderPass(VignetteShader);
-      //this.vignetteShader.uniforms.darkness.value = config.postEffects.vignetteDarkness;
-      //this.mainComposer.addPass(this.vignetteShader);
+      this.vignetteShader = new ShaderPass(VignetteShader);
+      this.vignetteShader.uniforms.darkness.value = config.postEffects.vignetteDarkness;
+      this.mainComposer.addPass(this.vignetteShader);
     }
   
 
     // Copy to screen
-    //this.mainComposer.addPass(this.copyPass);
+    this.mainComposer.addPass(this.copyPass);
   }
 
 
@@ -116,7 +111,6 @@ class Post{
   update(delta){
     this.environmentComposer.render(delta);
     this.gemBackComposer.render(delta);
-    this.gemFrontComposer.render(delta);
     this.mainComposer.render(delta);
   }
 }
