@@ -1,4 +1,5 @@
-import {TextureLoader, CubeTextureLoader} from 'three';
+import {TextureLoader, CubeTextureLoader, UnsignedByteType} from 'three';
+import HDRCubeTextureLoader from './libs/loaders/HDRCubeTextureLoader';
 import GLTFLoader from 'three-gltf-loader';
 
 export default class Loader {
@@ -16,7 +17,11 @@ export default class Loader {
       promises.push(this.loadTexture(queue.textureLoad[i]));
     }
     for(var i=0; i<queue.cubeTextureLoad.length; i++){
-      promises.push(this.loadCubeTexture(queue.cubeTextureLoad[i]));
+      if(queue.cubeTextureLoad[i].type ==='hdr'){
+        promises.push(this.loadHDRCubeTexture(queue.cubeTextureLoad[i]));
+      }else if(queue.cubeTextureLoad[i].type ==='ldr'){
+        promises.push(this.loadLDRCubeTexture(queue.cubeTextureLoad[i]));
+      }
     }
 
     return Promise.all(promises).then(result => {
@@ -29,6 +34,36 @@ export default class Loader {
       new TextureLoader().load(
         // resource URL
         asset.url,
+        
+        // called when the resource is loaded
+        function ( texture ) {
+          texture.encoding = asset.encoding;
+          asset.data = texture;
+          resolve(texture);
+        },
+  
+        // called when loading is in progresses
+        function ( xhr ) {
+          //console.log( ( xhr.loaded / xhr.total * 100 ) + '% loaded' );
+        },
+  
+        // called when loading has errors
+        function (error) {
+          console.log( 'An error happened' );
+          reject(error);
+        }
+      );
+    });
+  }
+
+  static loadHDRCubeTexture(asset){
+    return new Promise((resolve, reject) => {
+      new HDRCubeTextureLoader().load(
+        // type 
+        UnsignedByteType,
+
+        // resource URL
+        asset.urlArray,
         
         // called when the resource is loaded
         function ( texture ) {
@@ -50,11 +85,9 @@ export default class Loader {
     });
   }
 
-  static loadCubeTexture(asset){
+  static loadLDRCubeTexture(asset){
     return new Promise((resolve, reject) => {
-      const loader = new CubeTextureLoader();
-      loader.setPath('./assets/textures/env-maps/')
-      loader.load(
+      new CubeTextureLoader().load(
         // resource URL
         asset.urlArray,
         
@@ -104,27 +137,5 @@ export default class Loader {
     });
   }
 
-  /*
-  static loadMesh(parameters) {
-    const promises = [];
-
-    promises.push(this.loadGLTFScene(parameters.model));
-    promises.push(this.loadMaterial(parameters.material));
-    promises.push(this.loadCubeTexture(parameters.envMap));
-    if(parameters.map) promises.push(this.loadTexture(parameters.map));
-    if(parameters.roughnessMap) promises.push(this.loadTexture(parameters.roughnessMap));
-    if(parameters.normalMap) promises.push(this.loadTexture(parameters.normalMap));
-
-    return Promise.all(promises).then(result => {
-      return result;
-    });
-  }
-  */
-
-  static loadMaterial(material){
-    //do texture loading stuff here
-    
-    return material;
-  }
 }
 

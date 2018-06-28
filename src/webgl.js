@@ -7,10 +7,12 @@ import Cameras from './cameras';
 import {mainScene, gemBackFacingScene} from './scenes';
 import Bee from './bee';
 import Ring from './ring';
+import DynamicRing from './dynamicRing';
 import Gem from './gem';
 import SquareRing from './squareRing';
 import GemRing from './gemRing';
 import Post from './post';
+import DefaultSphere from './default-sphere';
 
 class WebGL {
   init(){
@@ -27,12 +29,18 @@ class WebGL {
       mainScene.init();
       gemBackFacingScene.init();
 
-          // Objects
+      // Objects
+      this.sphere = new DefaultSphere();
+      this.sphere.init();
+
       this.bee = new Bee();
       this.bee.init();
 
       this.ring = new Ring();
       this.ring.init();
+
+      this.dynamicRing = new DynamicRing();
+      this.dynamicRing.init();
 
       this.gem = new Gem();
       this.gem.init();
@@ -55,16 +63,19 @@ class WebGL {
 
       mainScene.update();
       gemBackFacingScene.update();
-      
+
+      //Cameras.cubeCamera.update(Renderer, mainScene);
+
       this.bee.update();
       this.ring.update();
+      this.dynamicRing.update();
       this.gem.update();
       this.squareRing.update();
       this.gemRing.update();
   
       Post.update(this.delta);
-      //this.renderer.update(this.mainScene, this.cameras.mainCamera);
-      //this.renderer.update(this.gemBackFacingScene, this.cameras.mainCamera);
+      //Renderer.update(mainScene, Cameras.mainCamera);
+      //Renderer.update(gemBackFacingScene, Cameras.mainCamera);
     }
 
     requestAnimationFrame(() => this.main());

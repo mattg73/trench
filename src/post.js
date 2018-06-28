@@ -3,7 +3,7 @@ import {FXAAShader, VignetteShader, BloomPass, ConvolutionShader} from 'three-ad
 import EffectComposer, {RenderPass, ShaderPass, CopyShader} from 'three-effectcomposer-es6';
 import Renderer from './renderer';
 import Cameras from './cameras';
-import {mainScene, gemBackFacingScene, gemFrontFacingScene} from './scenes'; 
+import {mainScene, gemBackFacingScene} from './scenes'; 
 import * as CompositeShader from './composite.glsl';
 //import UnrealBloomPass from './libs/postprocessing/UnrealBloomPass';
 import config from './config';
@@ -36,6 +36,8 @@ class Post{
     this.environmentRenderPass = new RenderPass(mainScene, Cameras.mainCamera);
     this.gemBackRenderPass = new RenderPass(gemBackFacingScene, Cameras.mainCamera);
 
+    console.log(this.environmentComposer);
+
     // Init Composite Uniforms
     const compositeParams = {
       uniforms: {
@@ -65,6 +67,7 @@ class Post{
       this.FXAAShader = new ShaderPass(FXAAShader);
       this.FXAAShader.uniforms.resolution.value = new Vector2(1 / window.innerWidth, 1 / window.innerHeight);
       this.mainComposer.addPass(this.FXAAShader);
+      this.mainComposer.addPass(this.copyPass);
     }
 
     // AO
@@ -79,15 +82,17 @@ class Post{
 
     // Bloom
     if(config.postEffects.bloom === true){
-      this.bloomPass = new ShaderPass(BloomPass);
-      //this.bloomPass.uniforms.
-
-      console.log(this.bloomPass);
+      // Parameters: strength, kernelSize, sigma, resolution
+      this.bloomPass = new BloomPass(
+        config.postEffects.bloomStrength, 
+        config.postEffects.bloomSize, 
+        config.postEffects.bloomSigma,
+        config.postEffects.bloomResolution,
+      );
 
       this.mainComposer.addPass( this.bloomPass );
     }
   
-
     // Color Grade
 
     // Chromatic Aberration
@@ -101,7 +106,6 @@ class Post{
       this.mainComposer.addPass(this.vignetteShader);
     }
   
-
     // Copy to screen
     this.mainComposer.addPass(this.copyPass);
   }

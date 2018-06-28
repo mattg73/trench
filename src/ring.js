@@ -10,7 +10,7 @@ export default class Ring {
 
     this.mesh = (Models.ring.data.scene.children[0]);
     this.mesh.material = Materials.copper;
-    this.mesh.material.envMap = CubeTextures.envMapStudio.data;
+    this.mesh.material.envMap = CubeTextures.envMapHDR.data;
 
     this.mesh.position.x = 5;
     this.mesh.position.y = 4;

@@ -14,7 +14,7 @@ export default class DefaultCube {
 
     this.mesh = (Models.cube.data.scene.children[0]);
     this.mesh.material = Materials.gold;
-    this.mesh.material.envMap = CubeTextures.envMapStudio.data;
+    this.mesh.material.envMap = CubeTextures.envMapHDR.data;
     this.mesh.position.x = 0;
     this.mesh.scale.multiplyScalar(3);
 

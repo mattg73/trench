@@ -1,4 +1,5 @@
 import {WebGLRenderer, Color} from 'three';
+import Config from './config';
 
 class Renderer extends WebGLRenderer{
   constructor(){
@@ -7,6 +8,15 @@ class Renderer extends WebGLRenderer{
 
   init(){
     this.setSize( window.innerWidth, window.innerHeight );
+
+    //this.gammaInput = false; //deprecated
+    //this.gammaFactor = 2;
+    this.gammaOutput = true;
+
+    this.toneMapping = Config.toneMapping.type;
+    this.toneMappingExposure = Config.toneMapping.exposure;
+    this.toneMappingWhitePoint = Config.toneMapping.whitePoint;
+
     document.body.appendChild( this.domElement );
   }
 

@@ -7,10 +7,12 @@ export default LoadQueues = {
     Models.gem, Models.ring, Models.bee, Models.squareRing, Models.gemRing
   ],
   textureLoad: [
+    Textures.copperBaseColor, Textures.copperRoughness, Textures.copperNormal,
+    Textures.beeBaseColor, Textures.beeRoughness, Textures.beeNormal, Textures.beeMetallic,
     Textures.squareRingBaseColor, Textures.squareRingRoughness, Textures.squareRingNormal, 
-    Textures.gemRingBaseColor, Textures.gemRingRoughness, Textures.gemRingNormal, 
+    Textures.gemRingBaseColor, Textures.gemRingRoughness, Textures.gemRingNormal
   ],
   cubeTextureLoad: [
-    CubeTextures.envMapStudio
+    CubeTextures.envMapLDR, CubeTextures.envMapHDR,  
   ]
 }

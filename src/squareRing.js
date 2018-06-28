@@ -11,7 +11,7 @@ export default class SquareRing {
     this.mesh = (Models.squareRing.data.scene.children[0]);
 
     this.mesh.material = Materials.squareRing;
-    this.mesh.material.envMap = CubeTextures.envMapStudio.data;
+    this.mesh.material.envMap = CubeTextures.envMapHDR.data;
 
     this.mesh.material.map = Textures.squareRingBaseColor.data;
     this.mesh.material.map.flipY = false;

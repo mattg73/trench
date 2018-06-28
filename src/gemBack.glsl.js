@@ -3,6 +3,7 @@ uniform float mRefractionRatio;
 uniform float mFresnelBias;
 uniform float mFresnelScale;
 uniform float mFresnelPower;
+uniform float uDispersion;
 uniform float uFaceDirection;
 
 varying vec3 vReflect;
@@ -19,9 +20,11 @@ void main()	{
 
   vReflect = reflect( I, worldNormal );
 
-  vRefract[0] = refract( normalize( I ), worldNormal, mRefractionRatio * 0.98);
+  float halfDispersion = uDispersion/2.0;
+
+  vRefract[0] = refract( normalize( I ), worldNormal, mRefractionRatio * (1.0-halfDispersion));
   vRefract[1] = refract( normalize( I ), worldNormal, mRefractionRatio );
-  vRefract[2] = refract( normalize( I ), worldNormal, mRefractionRatio * 1.02);
+  vRefract[2] = refract( normalize( I ), worldNormal, mRefractionRatio * (1.0+halfDispersion));
 
   vReflectionFactor = mFresnelBias + mFresnelScale * pow( 1.0 + dot( normalize( I ), worldNormal ), mFresnelPower );
 

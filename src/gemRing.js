@@ -13,7 +13,7 @@ export default class GemRing {
     this.meshMetal = (Models.gemRing.data.scene.children[2]).clone();
 
     this.meshMetal.material = Materials.gemRingMetal;
-    this.meshMetal.material.envMap = CubeTextures.envMapStudio.data;
+    this.meshMetal.material.envMap = CubeTextures.envMapHDR.data;
 
     this.meshMetal.material.map = Textures.gemRingBaseColor.data;
     this.meshMetal.material.map.flipY = false;
@@ -31,9 +31,9 @@ export default class GemRing {
     this.meshPearl = (Models.gemRing.data.scene.children[0]).clone();
 
     this.meshPearl.material = Materials.pearl;
-    this.meshPearl.material.envMap = CubeTextures.envMapStudio.data;
+    this.meshPearl.material.envMap = CubeTextures.envMapLDR.data;
     this.meshPearl.material.envMapIntensity = 1;
-    this.meshPearl.material.reflectivity = 4;
+    this.meshPearl.material.reflectivity = 3;
     this.meshPearl.material.needsUpdate = true;
 
     // Gem
@@ -55,8 +55,8 @@ export default class GemRing {
     this.container.add(this.meshPearl);
     this.container.add(this.meshGemFront);
 
-    this.container.position.y = 0;
-    this.meshGemBack.position.y = 0;
+    this.container.position.y = -4;
+    this.meshGemBack.position.y = -4;
 
     this.container.scale.multiplyScalar(1.6);
     this.meshGemBack.scale.multiplyScalar(1.6);
