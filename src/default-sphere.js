@@ -12,7 +12,7 @@ export default class DefaultSphere {
   init(){
     this.container = new Object3D();
 
-    const geometry = new SphereBufferGeometry(0.5,32,32);
+    const geometry = new SphereBufferGeometry(0.3,32,32);
 
     this.mesh = new Mesh(geometry, Materials.copperTexture);
     this.mesh.material.envMap = CubeTextures.envMapHDR.data;
@@ -30,8 +30,8 @@ export default class DefaultSphere {
     this.mesh.material.normalMap.flipY = false;
     this.mesh.material.normalMap.anisotropy = 16;
 
-    this.mesh.position.x = -5;
-    this.mesh.position.y = 4;
+    this.mesh.position.x = 0;
+    this.mesh.position.y = 0;
     this.mesh.scale.multiplyScalar(3);
 
     this.container.add(this.mesh);

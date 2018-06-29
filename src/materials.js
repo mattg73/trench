@@ -23,7 +23,7 @@ const goldParams = {
 
 const copperParams = {
   color: copperLinear,
-  roughness: 0.1,
+  roughness: 0.2,
   metalness: 1,
 }
 
@@ -61,6 +61,11 @@ const squareRingParams = {
 }
 
 const gemRingMetalParams = {
+  roughness: 1,
+  metalness: 1,
+}
+
+const celticRingParams = {
   roughness: 1,
   metalness: 1,
 }
@@ -133,6 +138,7 @@ export default Materials = {
   bee: new MeshStandardMaterial(beeParams),
   squareRing: new MeshStandardMaterial(squareRingParams),
   gemRingMetal: new MeshStandardMaterial(gemRingMetalParams),
+  celticRing: new MeshStandardMaterial(celticRingParams),
   shaderDiamondFront: new ShaderMaterial(shaderDiamondFrontParams),
   shaderDiamondBack: new ShaderMaterial(shaderDiamondBackParams),
   shaderSaphireFront: new ShaderMaterial(shaderSaphireFrontParams),

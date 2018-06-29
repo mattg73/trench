@@ -1,5 +1,8 @@
 import {TextureLoader, CubeTextureLoader, UnsignedByteType} from 'three';
+import Renderer from './renderer';
 import HDRCubeTextureLoader from './libs/loaders/HDRCubeTextureLoader';
+import PMREMGenerator from './libs/pmrem/PMREMGenerator';
+import PMREMCubeUVPacker from './libs/pmrem/PMREMCubeUVPacker';
 import GLTFLoader from 'three-gltf-loader';
 
 export default class Loader {
@@ -67,7 +70,13 @@ export default class Loader {
         
         // called when the resource is loaded
         function ( texture ) {
-          asset.data = texture;
+          const pmremGenerator = new PMREMGenerator( texture );
+          pmremGenerator.update( Renderer );
+          
+					const pmremCubeUVPacker = new PMREMCubeUVPacker( pmremGenerator.cubeLods );
+          pmremCubeUVPacker.update( Renderer );
+          
+          asset.data = pmremCubeUVPacker.CubeUVRenderTarget.texture;
           resolve(texture);
         },
   

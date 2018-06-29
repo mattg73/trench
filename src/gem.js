@@ -25,10 +25,10 @@ export default class Gem {
     this.meshBack.material.side = BackSide;
 
     this.meshFront.position.x = -5;
-    this.meshFront.scale.multiplyScalar(4);
+    this.meshFront.scale.multiplyScalar(2);
 
     this.meshBack.position.x = -5;
-    this.meshBack.scale.multiplyScalar(4);
+    this.meshBack.scale.multiplyScalar(2);
 
     mainScene.add(this.meshFront);
     gemBackFacingScene.add(this.meshBack);

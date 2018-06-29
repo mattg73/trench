@@ -3,14 +3,14 @@ import Config from './config';
 
 class Renderer extends WebGLRenderer{
   constructor(){
-    super({antialias:true});
+    super({antialias:false});
   }
 
   init(){
     this.setSize( window.innerWidth, window.innerHeight );
 
     //this.gammaInput = false; //deprecated
-    //this.gammaFactor = 2;
+    this.gammaFactor = 2.2;
     this.gammaOutput = true;
 
     this.toneMapping = Config.toneMapping.type;

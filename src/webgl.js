@@ -11,6 +11,7 @@ import DynamicRing from './dynamicRing';
 import Gem from './gem';
 import SquareRing from './squareRing';
 import GemRing from './gemRing';
+import CelticRing from './celticRing';
 import Post from './post';
 import DefaultSphere from './default-sphere';
 
@@ -27,7 +28,7 @@ class WebGL {
       Cameras.init();
 
       mainScene.init();
-      gemBackFacingScene.init();
+      //gemBackFacingScene.init();
 
       // Objects
       this.sphere = new DefaultSphere();
@@ -50,6 +51,9 @@ class WebGL {
 
       this.gemRing = new GemRing();
       this.gemRing.init();
+
+      this.celticRing = new CelticRing();
+      this.celticRing.init();
   
       Post.init();
 
@@ -62,7 +66,7 @@ class WebGL {
       this.delta = this.clock.getDelta();
 
       mainScene.update();
-      gemBackFacingScene.update();
+      //gemBackFacingScene.update();
 
       //Cameras.cubeCamera.update(Renderer, mainScene);
 
@@ -72,7 +76,8 @@ class WebGL {
       this.gem.update();
       this.squareRing.update();
       this.gemRing.update();
-  
+      this.celticRing.update();
+
       Post.update(this.delta);
       //Renderer.update(mainScene, Cameras.mainCamera);
       //Renderer.update(gemBackFacingScene, Cameras.mainCamera);

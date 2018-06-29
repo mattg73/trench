@@ -65,9 +65,9 @@ class Post{
     // Anti-aliasing
     if(config.postEffects.antialias === true){
       this.FXAAShader = new ShaderPass(FXAAShader);
-      this.FXAAShader.uniforms.resolution.value = new Vector2(1 / window.innerWidth, 1 / window.innerHeight);
+      this.FXAAShader.uniforms.resolution.value = new Vector2(window.innerWidth, window.innerHeight);
       this.mainComposer.addPass(this.FXAAShader);
-      this.mainComposer.addPass(this.copyPass);
+      //this.mainComposer.addPass(this.copyPass);
     }
 
     // AO

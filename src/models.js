@@ -25,5 +25,9 @@ export default Models = {
   gemRing: {
     url: modelPath+'gem-ring.glb',
     data: null
+  },
+  DRingBand: {
+    url: modelPath+'DRingBand.glb',
+    data: null
   }
 };

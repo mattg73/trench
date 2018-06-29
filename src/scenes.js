@@ -14,10 +14,12 @@ class MainScene extends Scene {
     //this.background = envMap;
     
     // Lights
-    this.lights = new Lights();
-    this.lights.init();
+    Lights.init();
+
+    this.add(Lights.ambientLight)
+
     //this.add(this.lights.sun);
-    this.add(this.lights.ambientLight)
+    
   }
 
   update(){
@@ -25,15 +27,4 @@ class MainScene extends Scene {
 }
 export let mainScene = new MainScene();
 
-export class GemBackFacingScene extends Scene {
-    constructor(){
-        super();
-    }
-
-    init(){
-    }
-
-    update(){
-    }
-}
-export let gemBackFacingScene = new GemBackFacingScene();
+export let gemBackFacingScene = new Scene();

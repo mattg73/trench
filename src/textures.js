@@ -66,6 +66,26 @@ export let Textures = {
     url: texturePath+'GemRing_Normal_DirectX.png',
     encoding: LinearEncoding,
     data: null
+  },
+  celticRingBaseColor: {
+    url: texturePath+'Celtic_BaseColor.png',
+    encoding: sRGBEncoding,
+    data: null
+  },
+  celticRingRoughness: {
+    url: texturePath+'Celtic_Roughness.png',
+    encoding: LinearEncoding,
+    data: null
+  },
+  celticRingNormal: {
+    url: texturePath+'Celtic_Normal_DirectX.png',
+    encoding: LinearEncoding,
+    data: null
+  },
+  celticRingMetallic: {
+    url: texturePath+'Celtic_Metallic.png',
+    encoding: LinearEncoding,
+    data: null
   }
 };
 
