@@ -11,23 +11,23 @@ export default class Gem {
 
   }
 
-  init(){
-    this.meshFront = (Models.gem.data.scene.children[0]).clone();
-    this.meshFront.material = Materials.shaderDiamondFront;
+  init(parameters){
+    this.meshFront = (parameters.model.data.scene.children[0]).clone();
+    this.meshFront.material = parameters.materialFront;
     this.meshFront.material.uniforms.tCube = Cameras.cubeCamera.renderTarget.texture;
     this.meshFront.material.uniforms.uFaceDirection.value = 1;
     this.meshFront.material.side = FrontSide;
       
-    this.meshBack = (Models.gem.data.scene.children[0]).clone();
-    this.meshBack.material = Materials.shaderDiamondBack;
+    this.meshBack = (parameters.model.data.scene.children[0]).clone();
+    this.meshBack.material = parameters.materialBack;
     this.meshBack.material.uniforms.tCube = Cameras.cubeCamera.renderTarget.texture;
     this.meshBack.material.uniforms.uFaceDirection.value = -1;
     this.meshBack.material.side = BackSide;
 
-    this.meshFront.position.x = -5;
-    this.meshFront.scale.multiplyScalar(2);
+    this.meshFront.position.x = parameters.location;
+    this.meshBack.position.x = parameters.location;
 
-    this.meshBack.position.x = -5;
+    this.meshFront.scale.multiplyScalar(2);
     this.meshBack.scale.multiplyScalar(2);
 
     mainScene.add(this.meshFront);

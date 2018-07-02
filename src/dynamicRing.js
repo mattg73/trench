@@ -3,56 +3,56 @@ import {mainScene} from './scenes';
 import Materials from './materials';
 import {CubeTextures} from './textures';
 
+export let Profiles = {
+  squareTemplate: [
+    new Vector2(-0.5,0),
+    new Vector2(0.5,0),
+    new Vector2(0.5,1),
+    new Vector2(-0.5,1)
+  ],
+  triangleTemplate: [
+    new Vector2(-0.5,0),
+    new Vector2(0.5,0),
+    new Vector2(0,1)
+  ],
+  roundTemplate: function(){
+    const points=[];
+    const segments = 16;
+    const angleInc = Math.PI*2/segments;
+    for(var i=0; i<segments; i++){
+      points.push(new Vector2(0.5 * Math.cos(angleInc*i), 0.5 * Math.sin(angleInc*i)));
+    }
+    return points;
+  }()
+}
+
 export default class DynamicRing {
-  init(){
+  init(parameters){
     this.container = new Object3D();
 
-    this.constructGeometry();
+    this.constructGeometry(parameters.width, parameters.height, parameters.template);
 
-    this.material = Materials.copper;
+    this.material = parameters.material;
     this.material.envMap = CubeTextures.envMapHDR.data;
-    this.material.shading = SmoothShading
+    this.material.flatShading = false;
 
     this.mesh = new Mesh(this.geometry, this.material);
 
-    this.container.position.x = 5;
-    this.container.position.y = -4;
+    this.container.position.x = parameters.location;
+    this.container.position.y = 4;
     this.container.scale.multiplyScalar(1);
     this.container.add(this.mesh);
     mainScene.add(this.container);
   }
 
-  constructGeometry(){
+  constructGeometry(width, height, template){
 
-    const height = 0.1;
-    const width = 0.2;
-
-    const sectionTemplates = { 
-      squareTemplate: [
-        new Vector2(-0.5*width,0),
-        new Vector2(0.5*width,0),
-        new Vector2(0.5*width,1*height),
-        new Vector2(-0.5*width,1*height)
-      ],
-      triangleTemplate: [
-        new Vector2(-0.5*width,0),
-        new Vector2(0.5*width,0),
-        new Vector2(0*width,1*height)
-      ],
-      roundTemplate: function(){
-        const points=[];
-        const segments = 16;
-        const angleInc = Math.PI*2/segments;
-        for(var i=0; i<segments; i++){
-          points.push(new Vector2(0.5 * width * Math.cos(angleInc*i), 0.5 * width * Math.sin(angleInc*i)))
-        }
-        console.log(points)
-        return points;
-      }()
-
+    const profile = [];    
+    for(var i=0; i<template.length; i++){
+      profile.push(new Vector2(template[i].x * width, template[i].y * height));
     }
-
-    const sectionShape = new Shape(sectionTemplates.roundTemplate);
+  
+    const sectionShape = new Shape(profile);
 
     const ringPath = new Curve();
     const radius = 1;
@@ -76,9 +76,8 @@ export default class DynamicRing {
   }
 
   update(){
-    //this.mesh.rotation.x += 0.01;
     this.container.rotation.y += 0.01;
-
-    //this.mesh.rotation.z += 0.002;
   }
 }
+
+

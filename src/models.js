@@ -6,12 +6,20 @@ export default Models = {
     url: modelPath+'cube.glb',
     data: null
   },
+  emerald: {
+    url: modelPath+'emerald.glb',
+    data: null
+  },
+  oval: {
+    url: modelPath+'oval.glb',
+    data: null
+  },
   gem: {
     url: modelPath+'gem.glb',
     data: null
   },
-  ring: {
-    url: modelPath+'ring.glb',
+  pear: {
+    url: modelPath+'pear.glb',
     data: null
   },
   bee: {
@@ -28,6 +36,10 @@ export default Models = {
   },
   DRingBand: {
     url: modelPath+'DRingBand.glb',
+    data: null
+  },
+  cameoRing: {
+    url: modelPath+'cameo.glb',
     data: null
   }
 };

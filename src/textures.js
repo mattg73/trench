@@ -86,6 +86,26 @@ export let Textures = {
     url: texturePath+'Celtic_Metallic.png',
     encoding: LinearEncoding,
     data: null
+  },
+  cameoRingBaseColor: {
+    url: texturePath+'Cameo_BaseColor.png',
+    encoding: sRGBEncoding,
+    data: null
+  },
+  cameoRingRoughness: {
+    url: texturePath+'Cameo_Roughness.png',
+    encoding: LinearEncoding,
+    data: null
+  },
+  cameoRingNormal: {
+    url: texturePath+'Cameo_Normal_DirectX.png',
+    encoding: LinearEncoding,
+    data: null
+  },
+  cameoRingMetallic: {
+    url: texturePath+'Cameo_Metallic.png',
+    encoding: LinearEncoding,
+    data: null
   }
 };
 

@@ -30,7 +30,8 @@ export default class Bee {
     this.mesh.material.metalnessMap.flipY = false;
     this.mesh.material.metalnessMap.anisotropy = 16;
 
-    this.mesh.position.x = 5;
+    this.mesh.position.x = 10;
+    this.mesh.position.y = -4;
     this.mesh.scale.multiplyScalar(2);
 
     this.container.add(this.mesh);

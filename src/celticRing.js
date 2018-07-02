@@ -29,8 +29,10 @@ export default class CelticRing {
     this.mesh.material.metalnessMap.flipY = false;
     this.mesh.material.metalnessMap.anisotropy = 16;
 
-    this.mesh.position.x = -5;
-    this.mesh.position.y = -4;
+    this.mesh.position.x = -10;
+    this.mesh.position.y = 4;
+    this.mesh.rotation.y = Math.PI*-0.5;
+    this.mesh.rotation.z = Math.PI*-0.5;
     this.mesh.scale.multiplyScalar(0.6);
 
     this.container.add(this.mesh);
@@ -38,8 +40,6 @@ export default class CelticRing {
   }
 
   update(){
-    this.mesh.rotation.x += 0.01;
     this.mesh.rotation.y += 0.01;
-    this.mesh.rotation.z += 0.002;
   }
 }

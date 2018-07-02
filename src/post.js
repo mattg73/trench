@@ -36,8 +36,6 @@ class Post{
     this.environmentRenderPass = new RenderPass(mainScene, Cameras.mainCamera);
     this.gemBackRenderPass = new RenderPass(gemBackFacingScene, Cameras.mainCamera);
 
-    console.log(this.environmentComposer);
-
     // Init Composite Uniforms
     const compositeParams = {
       uniforms: {
