@@ -62,12 +62,6 @@ const jadeParams = {
   metalness: 0,
 }
 
-const pearlParams = {
-  color: pearlLinear,
-  roughness: 0.7,
-  metalness: 0.0,
-}
-
 const emeraldParams = {
   color: emeraldLinear,
   ior: 1.58,
@@ -96,6 +90,12 @@ const saphireParams = {
   color: saphireLinear,
   ior: 1.777,
   dispersion: 0.018
+}
+
+const pearlParams = {
+  color: pearlLinear,
+  roughness: 0.7,
+  metalness: 0.0,
 }
 
 const shaderEmeraldFrontParams = {
@@ -254,6 +254,7 @@ export default Materials = {
   silver: new MeshStandardMaterial(silverParams),
   platinum: new MeshStandardMaterial(platinumParams),
   jade: new MeshStandardMaterial(jadeParams),
+  turquoise: new MeshStandardMaterial(standardParams),
   pearl: new MeshPhysicalMaterial(pearlParams),
   bee: new MeshStandardMaterial(standardParams),
   squareRing: new MeshStandardMaterial(standardParams),

@@ -1,8 +1,8 @@
 import { Object3D} from 'three';
-import {mainScene} from './scenes';
-import Models from './models';
-import Materials from './materials';
-import {CubeTextures} from './textures';
+import {mainScene} from '../scenes';
+import Models from '../models';
+import Materials from '../materials';
+import {CubeTextures} from '../textures';
 
 export default class DefaultCube {
   constructor(){

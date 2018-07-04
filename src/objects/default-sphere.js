@@ -1,8 +1,8 @@
 import { Object3D, SphereBufferGeometry, Mesh} from 'three';
-import {mainScene} from './scenes';
-import Models from './models';
-import Materials from './materials';
-import {Textures, CubeTextures} from './textures';
+import {mainScene} from '../scenes';
+import Models from '../models';
+import Materials from '../materials';
+import {Textures, CubeTextures} from '../textures';
 
 export default class DefaultSphere {
   constructor(){

@@ -22,6 +22,10 @@ export default Models = {
     url: modelPath+'pear.glb',
     data: null
   },
+  dome: {
+    url: modelPath+'dome.glb',
+    data: null
+  },
   bee: {
     url: modelPath+'bee.glb',
     data: null

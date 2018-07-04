@@ -1,10 +1,10 @@
 import { Object3D, Mesh, BackSide, FrontSide} from 'three';
-import {mainScene, gemBackFacingScene} from './scenes';
-import Cameras from './cameras';
-import Models from './models';
-import Materials from './materials';
-import {Textures, CubeTextures} from './textures';
-import Loader from './loader';
+import {mainScene, gemBackFacingScene} from '../scenes';
+import Cameras from '../cameras';
+import Models from '../models';
+import Materials from '../materials';
+import {Textures, CubeTextures} from '../textures';
+import Loader from '../loader';
 
 export default class Gem {
   constructor(){
@@ -30,6 +30,7 @@ export default class Gem {
     this.meshFront.scale.multiplyScalar(2);
     this.meshBack.scale.multiplyScalar(2);
 
+    this.hide();
     mainScene.add(this.meshFront);
     gemBackFacingScene.add(this.meshBack);
   }
@@ -40,5 +41,15 @@ export default class Gem {
 
     this.meshBack.rotation.x -= 0.005;
     this.meshBack.rotation.y -= 0.02;
+  }
+
+  show(){
+    this.meshFront.visible = true;
+    this.meshBack.visible = true;
+  }
+
+  hide(){
+    this.meshFront.visible = false;
+    this.meshBack.visible = false;
   }
 }

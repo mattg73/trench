@@ -108,12 +108,10 @@ class Post{
     this.mainComposer.addPass(this.copyPass);
   }
 
-
-
-  update(delta){
-    this.environmentComposer.render(delta);
-    this.gemBackComposer.render(delta);
-    this.mainComposer.render(delta);
+  update(){
+    this.environmentComposer.render();
+    this.gemBackComposer.render();
+    this.mainComposer.render();
   }
 }
 export default new Post();

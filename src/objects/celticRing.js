@@ -1,8 +1,8 @@
 import { Object3D} from 'three';
-import {mainScene} from './scenes';
-import Models from './models';
-import Materials from './materials';
-import {Textures, CubeTextures} from './textures';
+import {mainScene} from '../scenes';
+import Models from '../models';
+import Materials from '../materials';
+import {Textures, CubeTextures} from '../textures';
 
 export default class CelticRing {
   init(){
@@ -30,16 +30,25 @@ export default class CelticRing {
     this.mesh.material.metalnessMap.anisotropy = 16;
 
     this.mesh.position.x = -10;
-    this.mesh.position.y = 4;
+    this.mesh.position.y = 0;
     this.mesh.rotation.y = Math.PI*-0.5;
     this.mesh.rotation.z = Math.PI*-0.5;
     this.mesh.scale.multiplyScalar(0.6);
 
+    this.hide();
     this.container.add(this.mesh);
     mainScene.add(this.container);
   }
 
   update(){
     this.mesh.rotation.y += 0.01;
+  }
+
+  show(){
+    this.mesh.visible = true;
+  }
+  
+  hide(){
+    this.mesh.visible = false;
   }
 }

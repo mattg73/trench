@@ -4,10 +4,10 @@ import {Textures, CubeTextures} from './textures.js'
 let LoadQueues;
 export default LoadQueues = {
   modelLoad: [
-    Models.emerald, Models.oval, Models.gem, Models.pear, Models.bee, Models.squareRing, Models.gemRing, Models.DRingBand, Models.cameoRing
+    Models.emerald, Models.oval, Models.gem, Models.pear, Models.dome, Models.bee, Models.squareRing, Models.gemRing, Models.DRingBand, Models.cameoRing
   ],
   textureLoad: [
-    Textures.copperBaseColor, Textures.copperRoughness, Textures.copperNormal,
+    Textures.turquoiseBaseColor, Textures.turquoiseRoughness, Textures.turquoiseNormal, Textures.turquoiseMetallic,
     Textures.beeBaseColor, Textures.beeRoughness, Textures.beeNormal, Textures.beeMetallic,
     Textures.squareRingBaseColor, Textures.squareRingRoughness, Textures.squareRingNormal, 
     Textures.gemRingBaseColor, Textures.gemRingRoughness, Textures.gemRingNormal,

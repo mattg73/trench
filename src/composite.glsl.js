@@ -18,6 +18,6 @@ void main() {
   vec4 texel2 = texture2D( tGemBackFacing, vUv );
 
   gl_FragColor = mix(texel1, texel2, 1.0-texel1.a);
-  //gl_FragColor = texel1;
+  //gl_FragColor = vec4(texel2.a);
 }
 `;

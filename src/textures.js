@@ -2,18 +2,23 @@ import {sRGBEncoding, LinearEncoding} from 'three';
 const texturePath = './assets/textures/';
 
 export let Textures = {
-  copperBaseColor: {
-    url: texturePath+'Copper_BaseColor.png',
+  turquoiseBaseColor: {
+    url: texturePath+'Turquoise_BaseColor.png',
     encoding: sRGBEncoding,
     data: null
   },
-  copperRoughness: {
-    url: texturePath+'Copper_Roughness.png',
+  turquoiseRoughness: {
+    url: texturePath+'Turquoise_Roughness.png',
     encoding: LinearEncoding,
     data: null
   },
-  copperNormal: {
-    url: texturePath+'Copper_Normal.png',
+  turquoiseNormal: {
+    url: texturePath+'Turquoise_Normal.png',
+    encoding: LinearEncoding,
+    data: null
+  },
+  turquoiseMetallic: {
+    url: texturePath+'Turquoise_Metallic.png',
     encoding: LinearEncoding,
     data: null
   },

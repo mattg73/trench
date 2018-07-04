@@ -9,7 +9,7 @@ class Config{
     }
     this.postEffects = {
       antialias: true,
-      bloom: false,
+      bloom: true,
       bloomStrength: 2.0, 
       bloomSize: 12, 
       bloomSigma: 32,

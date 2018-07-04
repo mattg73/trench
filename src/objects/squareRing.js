@@ -1,8 +1,8 @@
 import { Object3D} from 'three';
-import {mainScene} from './scenes';
-import Models from './models';
-import Materials from './materials';
-import {Textures, CubeTextures} from './textures';
+import {mainScene} from '../scenes';
+import Models from '../models';
+import Materials from '../materials';
+import {Textures, CubeTextures} from '../textures';
 
 export default class SquareRing {
   init(){
@@ -26,9 +26,10 @@ export default class SquareRing {
     this.mesh.material.normalMap.anisotropy = 16;
 
     this.mesh.position.x = 5;
-    this.mesh.position.y = -4;
+    this.mesh.position.y = 0;
     this.mesh.scale.multiplyScalar(1);
 
+    this.hide();
     this.container.add(this.mesh);
     mainScene.add(this.container);
   }
@@ -37,5 +38,13 @@ export default class SquareRing {
     this.mesh.rotation.x += 0.01;
     this.mesh.rotation.y += 0.01;
     this.mesh.rotation.z += 0.002;
+  }
+
+  show(){
+    this.mesh.visible = true;
+  }
+
+  hide(){
+    this.mesh.visible = false;
   }
 }

@@ -1,9 +1,9 @@
 import { Object3D, Mesh, BackSide, FrontSide, CubeReflectionMapping, LinearMipMapLinearFilter} from 'three';
-import {mainScene, gemBackFacingScene} from './scenes';
-import Cameras from './cameras'; 
-import Models from './models';
-import Materials from './materials';
-import {Textures, CubeTextures} from './textures';
+import {mainScene, gemBackFacingScene} from '../scenes';
+import Cameras from '../cameras'; 
+import Models from '../models';
+import Materials from '../materials';
+import {Textures, CubeTextures} from '../textures';
 
 export default class GemRing {
   init(){
@@ -55,12 +55,13 @@ export default class GemRing {
     this.container.add(this.meshPearl);
     this.container.add(this.meshGemFront);
 
-    this.container.position.y = -4;
-    this.meshGemBack.position.y = -4;
+    this.container.position.y = 0;
+    this.meshGemBack.position.y = 0;
 
     this.container.scale.multiplyScalar(1.6);
     this.meshGemBack.scale.multiplyScalar(1.6);
 
+    this.hide();
     mainScene.add(this.container);
     gemBackFacingScene.add(this.meshGemBack);
     
@@ -74,5 +75,15 @@ export default class GemRing {
     this.meshGemBack.rotation.x += 0.01;
     this.meshGemBack.rotation.y += 0.01;
     this.meshGemBack.rotation.z += 0.002;
+  }
+
+  show(){
+    this.meshGemBack.visible = true;
+    this.container.visible = true;
+  }
+
+  hide(){
+    this.meshGemBack.visible = false;
+    this.container.visible = false;
   }
 }

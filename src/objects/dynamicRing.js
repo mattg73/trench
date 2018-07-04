@@ -1,7 +1,6 @@
-import { Object3D, Vector2, Vector3, Shape, Curve, ExtrudeGeometry, BufferGeometry, Float32BufferAttribute, Mesh, DoubleSide, SmoothShading, VertexNormalsHelper} from 'three';
-import {mainScene} from './scenes';
-import Materials from './materials';
-import {CubeTextures} from './textures';
+import { Object3D, Vector2, Vector3, Shape, Curve, ExtrudeGeometry, Mesh} from 'three';
+import {mainScene} from '../scenes';
+import {CubeTextures} from '../textures';
 
 export let Profiles = {
   squareTemplate: [
@@ -38,8 +37,10 @@ export default class DynamicRing {
 
     this.mesh = new Mesh(this.geometry, this.material);
 
+    this.hide();
+
     this.container.position.x = parameters.location;
-    this.container.position.y = 4;
+    this.container.position.y = 0;
     this.container.scale.multiplyScalar(1);
     this.container.add(this.mesh);
     mainScene.add(this.container);
@@ -77,6 +78,14 @@ export default class DynamicRing {
 
   update(){
     this.container.rotation.y += 0.01;
+  }
+
+  show(){
+    this.mesh.visible = true;
+  }
+
+  hide(){
+    this.mesh.visible = false;
   }
 }
 

@@ -1,5 +1,7 @@
 import { Scene, CubeReflectionMapping, Color } from 'three';
+import Renderer from './renderer';
 import Lights from './lights';
+import Cameras from './cameras';
 import {CubeTextures} from './textures';
 
 class MainScene extends Scene {
@@ -11,8 +13,9 @@ class MainScene extends Scene {
     // Environment map
     const envMap = CubeTextures.envMapLDR.data;
     envMap.mapping = CubeReflectionMapping
-    //this.background = envMap;
-    
+    this.background = envMap;
+    Cameras.cubeCamera.update(Renderer, this);
+    this.background = null;
     // Lights
     Lights.init();
 

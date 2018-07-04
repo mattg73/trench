@@ -1,8 +1,8 @@
 import { Object3D, Vector2} from 'three';
-import {mainScene} from './scenes';
-import Models from './models';
-import Materials from './materials';
-import {Textures, CubeTextures} from './textures';
+import {mainScene} from '../scenes';
+import Models from '../models';
+import Materials from '../materials';
+import {Textures, CubeTextures} from '../textures';
 
 export default class Bee {
   init(){
@@ -31,9 +31,10 @@ export default class Bee {
     this.mesh.material.metalnessMap.anisotropy = 16;
 
     this.mesh.position.x = 10;
-    this.mesh.position.y = -4;
+    this.mesh.position.y = 0;
     this.mesh.scale.multiplyScalar(2);
 
+    this.hide();
     this.container.add(this.mesh);
     mainScene.add(this.container);
   }
@@ -42,5 +43,13 @@ export default class Bee {
     this.mesh.rotation.x = -1;
     this.mesh.rotation.y += 0.01;
     //this.mesh.rotation.z =1;
+  }
+
+  show(){
+    this.mesh.visible = true;
+  }
+
+  hide(){
+    this.mesh.visible = false;
   }
 }
