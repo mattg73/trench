@@ -41,6 +41,7 @@ export default class DynamicRing {
 
     this.container.position.x = parameters.location;
     this.container.position.y = 0;
+    this.container.rotation.y = parameters.offset;
     this.container.scale.multiplyScalar(1);
     this.container.add(this.mesh);
     mainScene.add(this.container);

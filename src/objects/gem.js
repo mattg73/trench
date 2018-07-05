@@ -27,6 +27,9 @@ export default class Gem {
     this.meshFront.position.x = parameters.location;
     this.meshBack.position.x = parameters.location;
 
+    this.meshFront.rotation.y = parameters.offset;
+    this.meshBack.rotation.y = parameters.offset;
+
     this.meshFront.scale.multiplyScalar(2);
     this.meshBack.scale.multiplyScalar(2);
 

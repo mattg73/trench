@@ -1,4 +1,5 @@
-import { Object3D, Mesh, BackSide, FrontSide, CubeReflectionMapping, LinearMipMapLinearFilter} from 'three';
+import {Object3D, Mesh, BackSide, FrontSide, CubeReflectionMapping, LinearMipMapLinearFilter} from 'three';
+import Timer from '../timer';
 import {mainScene, gemBackFacingScene} from '../scenes';
 import Cameras from '../cameras'; 
 import Models from '../models';
@@ -58,6 +59,9 @@ export default class GemRing {
     this.container.position.y = 0;
     this.meshGemBack.position.y = 0;
 
+    this.container.rotation.x = 0;
+    this.container.rotation.y = 0;
+
     this.container.scale.multiplyScalar(1.6);
     this.meshGemBack.scale.multiplyScalar(1.6);
 
@@ -68,13 +72,14 @@ export default class GemRing {
   }
 
   update(){
-    this.container.rotation.x += 0.01;
-    this.container.rotation.y += 0.01;
-    this.container.rotation.z += 0.002;
+    const elapsed = Timer.getElapsedTime();
+    const amplitude = Math.PI * 0.2
 
-    this.meshGemBack.rotation.x += 0.01;
-    this.meshGemBack.rotation.y += 0.01;
-    this.meshGemBack.rotation.z += 0.002;
+    this.container.rotation.x = Math.PI*-0.2 + amplitude * Math.sin(elapsed);
+    this.container.rotation.y = amplitude * Math.cos(elapsed);
+
+    this.meshGemBack.rotation.x = Math.PI*-0.2 + amplitude * Math.sin(elapsed);
+    this.meshGemBack.rotation.y = amplitude * Math.cos(elapsed);
   }
 
   show(){

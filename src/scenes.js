@@ -16,6 +16,7 @@ class MainScene extends Scene {
     this.background = envMap;
     Cameras.cubeCamera.update(Renderer, this);
     this.background = null;
+
     // Lights
     Lights.init();
 
@@ -26,6 +27,7 @@ class MainScene extends Scene {
   }
 
   update(){
+    Cameras.update()
   }
 }
 export let mainScene = new MainScene();

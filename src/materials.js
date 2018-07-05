@@ -261,6 +261,7 @@ export default Materials = {
   gemRingMetal: new MeshStandardMaterial(standardParams),
   celticRing: new MeshStandardMaterial(standardParams),
   cameoRing: new MeshStandardMaterial(standardParams),
+  faceRing: new MeshStandardMaterial(standardParams),
   shaderEmeraldFront: new ShaderMaterial(shaderEmeraldFrontParams),
   shaderEmeraldBack: new ShaderMaterial(shaderEmeraldBackParams),
   shaderRubyFront: new ShaderMaterial(shaderRubyFrontParams),

@@ -5,11 +5,14 @@ class StateMachine{
         this.state = loadState;
         loadState.enter();
     }
+
     update(){
         this.state.update();
     }
-    click(){
-        if(typeof this.state.click === 'function') this.state.click();
+
+    // Actions
+    click(event){
+        if(typeof this.state.click === 'function') this.state.click(event);
     }
 }
 export default new StateMachine();

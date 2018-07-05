@@ -1,4 +1,5 @@
 import { Object3D} from 'three';
+import Timer from '../timer';
 import {mainScene} from '../scenes';
 import Models from '../models';
 import Materials from '../materials';
@@ -27,7 +28,9 @@ export default class SquareRing {
 
     this.mesh.position.x = 5;
     this.mesh.position.y = 0;
-    this.mesh.scale.multiplyScalar(1);
+    this.mesh.rotation.x = Math.PI*-0.5;
+
+    this.mesh.scale.multiplyScalar(1.2);
 
     this.hide();
     this.container.add(this.mesh);
@@ -35,9 +38,11 @@ export default class SquareRing {
   }
 
   update(){
-    this.mesh.rotation.x += 0.01;
-    this.mesh.rotation.y += 0.01;
-    this.mesh.rotation.z += 0.002;
+    const elapsed = Timer.getElapsedTime();
+    const amplitude = Math.PI * 0.2
+
+    this.mesh.rotation.x = Math.PI*-0.5 + amplitude * Math.sin(elapsed);
+    this.mesh.rotation.y = amplitude * Math.cos(elapsed);
   }
 
   show(){

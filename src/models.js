@@ -45,5 +45,9 @@ export default Models = {
   cameoRing: {
     url: modelPath+'cameo.glb',
     data: null
+  },
+  faceRing: {
+    url: modelPath+'face.glb',
+    data: null
   }
 };

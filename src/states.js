@@ -15,6 +15,7 @@ import SquareRing from './objects/squareRing';
 import GemRing from './objects/gemRing';
 import CelticRing from './objects/celticRing';
 import CameoRing from './objects/cameoRing';
+import FaceRing from './objects/faceRing';
 import Post from './post';
 import Listeners from './listeners';
 
@@ -69,10 +70,10 @@ class InitState extends State{
   
         // Rings
         const ringParameters = [
-          {material: Materials.gold, width: 0.2, height: 0.15, template: Profiles.squareTemplate, location: 10},
-          {material: Materials.copper, width: 0.4, height: 0.1, template: Profiles.squareTemplate, location: 5},
-          {material: Materials.platinum, width: 0.25, height: 0.125, template: Profiles.triangleTemplate, location: 0},
-          {material: Materials.jade, width: 0.5, height: 0.2, template: Profiles.roundTemplate, location: -5}
+          {material: Materials.gold, width: 0.2, height: 0.15, template: Profiles.squareTemplate, location: 10, offset:0.0},
+          {material: Materials.copper, width: 0.4, height: 0.1, template: Profiles.squareTemplate, location: 5, offset:-0.2},
+          {material: Materials.platinum, width: 0.25, height: 0.125, template: Profiles.triangleTemplate, location: 0, offset:-0.4},
+          {material: Materials.jade, width: 0.5, height: 0.2, template: Profiles.roundTemplate, location: -5, offset:-0.6}
         ]
   
         Objects.dynamicRings = [];
@@ -84,10 +85,10 @@ class InitState extends State{
   
         // Gems and Stones
         const gemParameters = [
-          {model: Models.emerald, materialFront: Materials.shaderEmeraldFront, materialBack: Materials.shaderEmeraldBack, location: 10},
-          {model: Models.oval, materialFront: Materials.shaderRubyFront, materialBack: Materials.shaderRubyBack, location: 5},
-          {model: Models.gem , materialFront: Materials.shaderDiamondFront, materialBack: Materials.shaderDiamondBack, location: 0},
-          {model: Models.pear, materialFront: Materials.shaderDemantoidFront, materialBack: Materials.shaderDemantoidBack, location: -5},
+          {model: Models.emerald, materialFront: Materials.shaderEmeraldFront, materialBack: Materials.shaderEmeraldBack, location: 10, offset:0.0},
+          {model: Models.oval, materialFront: Materials.shaderRubyFront, materialBack: Materials.shaderRubyBack, location: 5, offset:-0.2},
+          {model: Models.gem , materialFront: Materials.shaderDiamondFront, materialBack: Materials.shaderDiamondBack, location: 0, offset:-0.4},
+          {model: Models.pear, materialFront: Materials.shaderDemantoidFront, materialBack: Materials.shaderDemantoidBack, location: -5, offset:-0.6},
         ]
   
         Objects.gems = [];
@@ -115,6 +116,9 @@ class InitState extends State{
   
         Objects.cameoRing = new CameoRing();
         Objects.cameoRing.init();
+
+        Objects.faceRing = new FaceRing();
+        Objects.faceRing.init();
     
         Post.init();
   
@@ -160,8 +164,12 @@ class RingsState extends State{
 
         Objects.celticRing.hide();
     }
-    click(){
-        this.transition(stonesState);
+    click(event){
+        if(event.x/window.innerWidth < 0.3 ){
+
+        }else if(event.x/window.innerWidth > 0.7 ){
+            this.transition(stonesState);
+        }
     }
 }
 export let ringsState = new RingsState();
@@ -192,8 +200,12 @@ class StonesState extends State{
 
         Objects.turquoise.hide();
     }
-    click(){
-        this.transition(ornamentsState);
+    click(){     
+        if(event.x/window.innerWidth < 0.3 ){
+            this.transition(ringsState);
+        }else if(event.x/window.innerWidth > 0.7 ){
+            this.transition(ornamentsState);
+        }
     }
 }
 export let stonesState = new StonesState();
@@ -203,8 +215,8 @@ class OrnamentsState extends State{
         Objects.bee.show();
         Objects.squareRing.show();
         Objects.gemRing.show();
-        
         Objects.cameoRing.show();
+        Objects.faceRing.show();
     }
     update(){        
         mainScene.update();
@@ -212,16 +224,23 @@ class OrnamentsState extends State{
         Objects.bee.update();
         Objects.squareRing.update();
         Objects.gemRing.update();
-        
         Objects.cameoRing.update();
+        Objects.faceRing.update();
         Post.update();
     }
     exit(){
         Objects.bee.hide();
         Objects.squareRing.hide();
         Objects.gemRing.hide();
-        
         Objects.cameoRing.hide();
+        Objects.faceRing.hide();
+    }
+    click(){     
+        if(event.x/window.innerWidth < 0.3 ){
+            this.transition(stonesState);
+        }else if(event.x/window.innerWidth > 0.7 ){
+            
+        }
     }
 }
 export let ornamentsState = new OrnamentsState();

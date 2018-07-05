@@ -111,6 +111,26 @@ export let Textures = {
     url: texturePath+'Cameo_Metallic.png',
     encoding: LinearEncoding,
     data: null
+  },
+  faceRingBaseColor: {
+    url: texturePath+'Face_BaseColor.png',
+    encoding: sRGBEncoding,
+    data: null
+  },
+  faceRingRoughness: {
+    url: texturePath+'Face_Roughness.png',
+    encoding: LinearEncoding,
+    data: null
+  },
+  faceRingNormal: {
+    url: texturePath+'Face_Normal.png',
+    encoding: LinearEncoding,
+    data: null
+  },
+  faceRingMetallic: {
+    url: texturePath+'Face_Metallic.png',
+    encoding: LinearEncoding,
+    data: null
   }
 };
 

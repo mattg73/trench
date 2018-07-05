@@ -37,6 +37,7 @@ class Post{
     this.gemBackRenderPass = new RenderPass(gemBackFacingScene, Cameras.mainCamera);
 
     // Init Composite Uniforms
+    
     const compositeParams = {
       uniforms: {
         tEnvironment: { type: "t", value: this.environmentComposer.renderTarget2 },
@@ -48,15 +49,17 @@ class Post{
 
     this.compositeMaterial = new ShaderMaterial(compositeParams);
     this.compositePass = new ShaderPass(this.compositeMaterial);
+    
 
     // Add Passes
     this.environmentComposer.addPass(this.environmentRenderPass);
     this.environmentComposer.addPass(this.copyPass);
+    
     this.gemBackComposer.addPass(this.gemBackRenderPass);
     this.gemBackComposer.addPass(this.copyPass);
 
     this.mainComposer.addPass(this.compositePass);
-
+    
 
     // Post-Processing Effects
 
@@ -98,6 +101,7 @@ class Post{
     // Grain
 
     // Vignette
+    
     if(config.postEffects.vignette === true){
       this.vignetteShader = new ShaderPass(VignetteShader);
       this.vignetteShader.uniforms.darkness.value = config.postEffects.vignetteDarkness;
@@ -112,6 +116,30 @@ class Post{
     this.environmentComposer.render();
     this.gemBackComposer.render();
     this.mainComposer.render();
+  }
+
+  setSize( width, height ){
+    
+    this.environmentComposer.setSize( width , height );
+    this.gemBackComposer.setSize( width, height );
+    this.mainComposer.setSize( width, height );
+
+    this.environmentComposer.renderTarget2.viewport.z = width;
+    this.environmentComposer.renderTarget2.viewport.w = height;
+
+    this.gemBackComposer.renderTarget2.viewport.z = width;
+    this.gemBackComposer.renderTarget2.viewport.w = height;
+
+    this.mainComposer.renderTarget2.viewport.z = width;
+    this.mainComposer.renderTarget2.viewport.w = height;
+
+    //this.mainComposer.passes[0].uniforms.tEnvironment.value = this.renderTargetEnvironment
+    //this.mainComposer.passes[0].uniforms.tGemBackFacing.value = this.renderTargetGemBack.texture
+
+    if(config.postEffects.antialias === true){
+      this.FXAAShader.uniforms.resolution.value.set( window.innerWidth, window.innerHeight )
+    }
+    
   }
 }
 export default new Post();
