@@ -5,7 +5,7 @@ import StateMachine from './stateMachine';
 class WebGL {
   init(){
     this.clock = new Clock();
-    //this.gui = new dat.GUI();
+    this.gui = new dat.GUI();
 
     StateMachine.init();
   }
