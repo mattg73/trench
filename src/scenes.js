@@ -20,10 +20,8 @@ class MainScene extends Scene {
     // Lights
     Lights.init();
 
-    this.add(Lights.ambientLight)
-
-    //this.add(this.lights.sun);
-    
+    //this.add(Lights.ambientLight)
+    //this.add(Lights.sun);
   }
 
   update(){
