@@ -5,17 +5,7 @@ import LoadQueues from './load-queues';
 import Renderer from './renderer';
 import Cameras from './cameras';
 import {mainScene} from './scenes';
-import Models from './models';
-import Materials from './materials';
-import DynamicRing, {Profiles} from './objects/dynamicRing';
-import Gem from './objects/gem';
-import Turquoise from './objects/turquoise';
-import Bee from './objects/bee';
-import SquareRing from './objects/squareRing';
-import GemRing from './objects/gemRing';
-import CelticRing from './objects/celticRing';
-import CameoRing from './objects/cameoRing';
-import FaceRing from './objects/faceRing';
+import StinkObject from './objects/stink-object';
 import Post from './post';
 import Listeners from './listeners';
 
@@ -65,8 +55,8 @@ class InitState extends State{
         mainScene.init();
   
         // Objects
-        Objects.sphere = new DefaultSphere();
-        Objects.sphere.init();
+        Objects.stinkObject = new StinkObject();
+        Objects.stinkObject.init();
     
         Post.init();
   
@@ -86,17 +76,17 @@ class MainState extends State{
         this.id = 'mainState'
     }
     enter(){
-        Objects.sphere.show();
+        Objects.stinkObject.show();
     }
     update(){
         mainScene.update();
-        Objects.sphere.update();
+        Objects.stinkObject.update();
         Post.update();
         //Renderer.update(mainScene, Cameras.mainCamera);
         //Renderer.update(gemBackFacingScene, Cameras.mainCamera);
     }
     exit(){
-        Objects.sphere.hide();
+        Objects.stinkObject.hide();
     }
     click(event){
 

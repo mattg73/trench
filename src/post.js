@@ -33,11 +33,12 @@ class Post{
     this.copyPass = new ShaderPass(CopyShader);
     this.copyPass.renderToScreen = true;
 
-    this.environmentRenderPass = new RenderPass(mainScene, Cameras.mainCamera);
-    this.gemBackRenderPass = new RenderPass(gemBackFacingScene, Cameras.mainCamera);
+    //this.environmentRenderPass = new RenderPass(mainScene, Cameras.mainCamera);
+    //this.gemBackRenderPass = new RenderPass(gemBackFacingScene, Cameras.mainCamera);
+    this.mainRenderPass = new RenderPass(mainScene, Cameras.mainCamera);
 
     // Init Composite Uniforms
-    
+    /*
     const compositeParams = {
       uniforms: {
         tEnvironment: { type: "t", value: this.environmentComposer.renderTarget2 },
@@ -49,9 +50,11 @@ class Post{
 
     this.compositeMaterial = new ShaderMaterial(compositeParams);
     this.compositePass = new ShaderPass(this.compositeMaterial);
+    */
     
 
     // Add Passes
+    /*
     this.environmentComposer.addPass(this.environmentRenderPass);
     this.environmentComposer.addPass(this.copyPass);
     
@@ -59,6 +62,9 @@ class Post{
     this.gemBackComposer.addPass(this.copyPass);
 
     this.mainComposer.addPass(this.compositePass);
+    */
+
+    this.mainComposer.addPass(this.mainRenderPass);
     
 
     // Post-Processing Effects
