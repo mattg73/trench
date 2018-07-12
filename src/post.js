@@ -107,7 +107,6 @@ class Post{
     // Grain
 
     // Vignette
-    
     if(config.postEffects.vignette === true){
       this.vignetteShader = new ShaderPass(VignetteShader);
       this.vignetteShader.uniforms.darkness.value = config.postEffects.vignetteDarkness;
