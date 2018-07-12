@@ -1,4 +1,4 @@
-# three-template-17
+# three-template
 
 A simple framework for THREE.js projects with support for: 
 
