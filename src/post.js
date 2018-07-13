@@ -1,6 +1,7 @@
 import {WebGLRenderTarget, LinearFilter, RGBAFormat, Vector2, ShaderMaterial, UniformsUtils, AdditiveBlending} from 'three';
 import {FXAAShader, VignetteShader, BloomPass, ConvolutionShader} from 'three-addons';
 import EffectComposer, {RenderPass, ShaderPass, CopyShader} from 'three-effectcomposer-es6';
+import Debug from './debug';
 import Renderer from './renderer';
 import Cameras from './cameras';
 import {mainScene, gemBackFacingScene} from './scenes'; 
@@ -26,7 +27,7 @@ class Post{
 
     // Composers
     this.environmentComposer = new EffectComposer(Renderer, this.renderTargetEnvironment);
-    this.gemBackComposer = new EffectComposer(Renderer, this.renderTargetGemBack)
+    this.gemBackComposer = new EffectComposer(Renderer, this.renderTargetGemBack);
     this.mainComposer = new EffectComposer(Renderer, this.renderTargetMain);
 
     // Init Passes
@@ -74,7 +75,9 @@ class Post{
       this.FXAAShader = new ShaderPass(FXAAShader);
       this.FXAAShader.uniforms.resolution.value = new Vector2(window.innerWidth, window.innerHeight);
       this.mainComposer.addPass(this.FXAAShader);
-      //this.mainComposer.addPass(this.copyPass);
+
+      const AAFolder = Debug.postProcessing.addFolder('FXAA');
+      AAFolder.add(this.FXAAShader, 'enabled');
     }
 
     // AO
@@ -98,6 +101,9 @@ class Post{
       );
 
       this.mainComposer.addPass( this.bloomPass );
+
+      const BloomFolder = Debug.postProcessing.addFolder('Bloom');
+      BloomFolder.add(this.bloomPass, 'enabled');
     }
   
     // Color Grade
@@ -111,6 +117,10 @@ class Post{
       this.vignetteShader = new ShaderPass(VignetteShader);
       this.vignetteShader.uniforms.darkness.value = config.postEffects.vignetteDarkness;
       this.mainComposer.addPass(this.vignetteShader);
+
+      const VignetteFolder = Debug.postProcessing.addFolder('Vignette');
+      VignetteFolder.add(this.vignetteShader, 'enabled');
+      VignetteFolder.add(this.vignetteShader.uniforms.darkness, 'value', -1, 1);
     }
   
     // Copy to screen

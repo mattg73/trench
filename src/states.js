@@ -1,3 +1,4 @@
+import Config from './config';
 import StateMachine from './stateMachine';
 import Objects from './objects';
 import Loader from './loader';
@@ -49,6 +50,7 @@ class InitState extends State{
         this.id = 'initState'
     }
     enter(){
+        Config.init();
         Renderer.init();
         Cameras.init();
   
@@ -82,8 +84,8 @@ class MainState extends State{
         mainScene.update();
         Objects.stinkObject.update();
         Post.update();
-        //Renderer.update(mainScene, Cameras.mainCamera);
-        //Renderer.update(gemBackFacingScene, Cameras.mainCamera);
+        // Renderer.update(mainScene, Cameras.mainCamera);
+        // Renderer.update(gemBackFacingScene, Cameras.mainCamera);
     }
     exit(){
         Objects.stinkObject.hide();

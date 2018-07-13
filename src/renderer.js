@@ -1,4 +1,5 @@
 import {WebGLRenderer, Color} from 'three';
+import Debug from './debug';
 import Config from './config';
 
 class Renderer extends WebGLRenderer{
@@ -18,6 +19,11 @@ class Renderer extends WebGLRenderer{
     this.toneMappingWhitePoint = Config.toneMapping.whitePoint;
 
     document.body.appendChild( this.domElement );
+
+    const toneMappingFolder = Debug.postProcessing.addFolder('Tone Mapping');
+    toneMappingFolder.add(this, 'toneMappingExposure', 0, 5);
+    toneMappingFolder.add(this, 'toneMappingWhitePoint', 0, 5);
+
   }
 
   update(scene, camera){

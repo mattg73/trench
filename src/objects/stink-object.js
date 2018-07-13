@@ -1,4 +1,5 @@
 import { Object3D} from 'three';
+import Debug from '../debug';
 import Timer from '../timer'
 import {mainScene} from '../scenes';
 import Models from '../models';
@@ -34,20 +35,24 @@ export default class StinkObject {
     this.mesh.material.metalnessMap.flipY = false;
     this.mesh.material.metalnessMap.anisotropy = 16;
 
-
     this.mesh.position.x = 0;
     this.mesh.scale.multiplyScalar(1);
 
     this.container.add(this.mesh);
     mainScene.add(this.container);
+
+    this.amplitude = (Math.PI * 0.1);
+    this.frequency = 1;
+
+    Debug.object.add(this, 'amplitude', 0, Math.PI * 0.3)
+    Debug.object.add(this, 'frequency', 0.5, 3)
   }
 
   update(){
     const elapsed = Timer.getElapsedTime();
-    const amplitude = Math.PI * 0.1
-
-    this.container.rotation.x = amplitude * 0.5 * Math.sin(elapsed);
-    this.container.rotation.y = amplitude * Math.cos(elapsed);
+    
+    this.container.rotation.x = this.amplitude * 0.5 * Math.sin(elapsed * this.frequency);
+    this.container.rotation.y = this.amplitude * Math.cos(elapsed * this.frequency);
   }
 
   show(){

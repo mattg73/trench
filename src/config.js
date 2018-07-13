@@ -1,7 +1,7 @@
 import {NoToneMapping, LinearToneMapping, ReinhardToneMapping, Uncharted2ToneMapping, CineonToneMapping} from 'three';
 
 class Config{
-  constructor(){
+  init(){
     this.toneMapping = {
       type: Uncharted2ToneMapping,
       exposure: 1,
@@ -9,7 +9,7 @@ class Config{
     }
     this.postEffects = {
       antialias: true,
-      bloom: false,
+      bloom: true,
       bloomStrength: 2.0, 
       bloomSize: 12, 
       bloomSigma: 32,
@@ -17,11 +17,9 @@ class Config{
       filmGrain: false,
       barrelDistortion: false,
       chromaticAberration: false,
-      vignette: false,
+      vignette: true,
       vignetteDarkness: 0.9
     }
-
   }
 }
-
 export default new Config();
