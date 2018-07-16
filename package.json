@@ -37,6 +37,7 @@
     "three-addons": "^1.2.0",
     "three-effectcomposer-es6": "^0.0.4",
     "three-gltf-loader": "^1.93.0",
-    "three-stats": "^1.0.1"
+    "three-stats": "^1.0.1",
+    "three-webgl-stats": "^1.0.5"
   }
 }

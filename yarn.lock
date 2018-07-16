@@ -3309,6 +3309,10 @@ three-stats@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/three-stats/-/three-stats-1.0.1.tgz#44ebdcf87d31760196d174e18366364fae172a63"
 
+three-webgl-stats@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/three-webgl-stats/-/three-webgl-stats-1.0.5.tgz#9b4852b9fd9319e9b605d71e9e58cace9618d9b6"
+
 three@>=0.89.0, three@^0.93.0:
   version "0.93.0"
   resolved "https://registry.yarnpkg.com/three/-/three-0.93.0.tgz#3fd6c367ef4554abbb6e16ad69936283e895c123"
