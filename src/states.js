@@ -6,7 +6,7 @@ import LoadQueues from './load-queues';
 import Renderer from './renderer';
 import Cameras from './cameras';
 import {mainScene} from './scenes';
-import StinkObject from './objects/stink-object';
+import Trench from './objects/trench';
 import Post from './post';
 import Listeners from './listeners';
 
@@ -57,8 +57,8 @@ class InitState extends State{
         mainScene.init();
   
         // Objects
-        Objects.stinkObject = new StinkObject();
-        Objects.stinkObject.init();
+        Objects.trench = new Trench();
+        Objects.trench.init();
     
         Post.init();
   
@@ -78,20 +78,23 @@ class MainState extends State{
         this.id = 'mainState'
     }
     enter(){
-        Objects.stinkObject.show();
+        Objects.trench.show();
     }
     update(){
         mainScene.update();
-        Objects.stinkObject.update();
+        Objects.trench.update();
         Post.update();
         // Renderer.update(mainScene, Cameras.mainCamera);
         // Renderer.update(gemBackFacingScene, Cameras.mainCamera);
     }
     exit(){
-        Objects.stinkObject.hide();
+        Objects.trench.hide();
     }
     click(event){
 
+    }
+    keyDown(event){
+        Cameras.keyDown(event);
     }
 }
 export let mainState = new MainState();

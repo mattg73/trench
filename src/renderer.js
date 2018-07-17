@@ -1,4 +1,4 @@
-import {WebGLRenderer, Color} from 'three';
+import {WebGLRenderer, Color, PCFSoftShadowMap} from 'three';
 import Debug from './debug';
 import Config from './config';
 
@@ -9,6 +9,9 @@ class Renderer extends WebGLRenderer{
 
   init(){
     this.setSize( window.innerWidth, window.innerHeight );
+
+    this.shadowMap.enabled = true;
+    this.shadowMap.type = PCFSoftShadowMap;
 
     //this.gammaInput = false; //deprecated
     this.gammaFactor = 2.2;

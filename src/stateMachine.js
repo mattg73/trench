@@ -14,6 +14,10 @@ class StateMachine{
     click(event){
         if(typeof this.state.click === 'function') this.state.click(event);
     }
+
+    keyDown(event){
+        if(typeof this.state.keyDown === 'function') this.state.keyDown(event);
+    }
 }
 export default new StateMachine();
 

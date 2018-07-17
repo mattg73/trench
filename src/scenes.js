@@ -1,4 +1,4 @@
-import { Scene, CubeReflectionMapping, Color } from 'three';
+import { Scene, CubeReflectionMapping, Color, FogExp2 } from 'three';
 import Renderer from './renderer';
 import Lights from './lights';
 import Cameras from './cameras';
@@ -22,6 +22,8 @@ class MainScene extends Scene {
 
     //this.add(Lights.ambientLight)
     //this.add(Lights.sun);
+
+    this.fog = new FogExp2('black', 0.0005)
   }
 
   update(){
