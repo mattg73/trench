@@ -10,7 +10,7 @@ class Cameras {
     this.acceleration = new Vector2()
 
     this.mainCamera = new PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 5000 );
-    this.mainCamera.position.set( 0, 20, 80 );
+    this.mainCamera.position.set( 0, 20, 10 );
     this.mainCamera.lookAt( 0, 20, 0 );
 
     this.cubeCamera = new CubeCamera(0.1, 1000, 256);
@@ -27,7 +27,7 @@ class Cameras {
 
     this.mainCamera.position.x += this.velocity.x * elapsed;
     this.mainCamera.position.y += this.velocity.y * elapsed;
-    //this.mainCamera.position.z += this.speed * elapsed;
+    this.mainCamera.position.z += this.speed * elapsed;
 
     if(this.mainCamera.position.x < -20) this.mainCamera.position.x = -20;
     if(this.mainCamera.position.x > 20) this.mainCamera.position.x = 20;  
