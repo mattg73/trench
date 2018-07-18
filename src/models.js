@@ -21,5 +21,13 @@ export default Models = {
   prefab05: {
     url: modelPath+'prefab-05.glb',
     data: null
+  },
+  lazer: {
+    url: modelPath+'lazer.glb',
+    data: null
+  },
+  bolt: {
+    url: modelPath+'lazer-bolt.glb',
+    data: null
   }
 };

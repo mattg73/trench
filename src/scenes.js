@@ -14,14 +14,13 @@ class MainScene extends Scene {
     const envMap = CubeTextures.envMapLDR.data;
     envMap.mapping = CubeReflectionMapping
     this.background = envMap;
-    Cameras.cubeCamera.update(Renderer, this);
-    this.background = null;
 
     // Lights
     Lights.init();
 
-    //this.add(Lights.ambientLight)
-    //this.add(Lights.sun);
+    this.add(Lights.ambientLight)
+    this.add(Lights.sun);
+    this.add(Lights.lazer);
 
     this.fog = new FogExp2('black', 0.0005)
   }

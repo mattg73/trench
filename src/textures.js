@@ -2,24 +2,34 @@ import {sRGBEncoding, LinearEncoding} from 'three';
 const texturePath = './assets/textures/';
 
 export let Textures = {
-  objectBaseColor: {
-    url: texturePath+'Object_BaseColor.png',
+  prefab1Bake: {
+    url: texturePath+'prefab-01-bake.png',
     encoding: sRGBEncoding,
     data: null
   },
-  objectRoughness: {
-    url: texturePath+'Object_Roughness.png',
-    encoding: LinearEncoding,
+  prefab2Bake: {
+    url: texturePath+'prefab-02-bake.png',
+    encoding: sRGBEncoding,
     data: null
   },
-  objectNormal: {
-    url: texturePath+'Object_Normal.png',
-    encoding: LinearEncoding,
+  prefab3Bake: {
+    url: texturePath+'prefab-03-bake.png',
+    encoding: sRGBEncoding,
     data: null
   },
-  objectMetallic: {
-    url: texturePath+'Object_Metallic.png',
-    encoding: LinearEncoding,
+  prefab4Bake: {
+    url: texturePath+'prefab-04-bake.png',
+    encoding: sRGBEncoding,
+    data: null
+  },
+  prefab5Bake: {
+    url: texturePath+'prefab-05-bake.png',
+    encoding: sRGBEncoding,
+    data: null
+  },
+  boltRed: {
+    url: texturePath+'bolt-red.png',
+    encoding: sRGBEncoding,
     data: null
   }
 };
@@ -51,3 +61,25 @@ export let CubeTextures = {
     data: null
   }
 };
+
+/*
+objectBaseColor: {
+    url: texturePath+'Object_BaseColor.png',
+    encoding: sRGBEncoding,
+    data: null
+  },
+  objectRoughness: {
+    url: texturePath+'Object_Roughness.png',
+    encoding: LinearEncoding,
+    data: null
+  },
+  objectNormal: {
+    url: texturePath+'Object_Normal.png',
+    encoding: LinearEncoding,
+    data: null
+  },
+  objectMetallic: {
+    url: texturePath+'Object_Metallic.png',
+    encoding: LinearEncoding,
+    data: null
+  }*/

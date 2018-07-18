@@ -3,9 +3,8 @@ import Timer from './timer';
 
 class Cameras {
   init(){
-    this.speed = -100
-    this.maxAcceleration = 20
     this.maxVelocity = 40
+    this.maxAcceleration = 20
     this.velocity = new Vector2()
     this.acceleration = new Vector2()
 
@@ -20,17 +19,15 @@ class Cameras {
     //const elapsed = Timer.getDelta();
     const elapsed = 1/60;
 
-
     this.velocity.add(this.acceleration);
     this.velocity.multiplyScalar(0.98);
     this.velocity.clampLength(0,this.maxVelocity);
 
     this.mainCamera.position.x += this.velocity.x * elapsed;
     this.mainCamera.position.y += this.velocity.y * elapsed;
-    this.mainCamera.position.z += this.speed * elapsed;
 
-    if(this.mainCamera.position.x < -20) this.mainCamera.position.x = -20;
-    if(this.mainCamera.position.x > 20) this.mainCamera.position.x = 20;  
+    if(this.mainCamera.position.x < -17) this.mainCamera.position.x = -17;
+    if(this.mainCamera.position.x > 17) this.mainCamera.position.x = 17;  
     if(this.mainCamera.position.y < 5) this.mainCamera.position.y = 5;
     if(this.mainCamera.position.y > 45) this.mainCamera.position.y = 45;  
 

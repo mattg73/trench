@@ -7,6 +7,7 @@ import Renderer from './renderer';
 import Cameras from './cameras';
 import {mainScene} from './scenes';
 import Trench from './objects/trench';
+import Lazer from './objects/lazer';
 import Post from './post';
 import Listeners from './listeners';
 
@@ -59,6 +60,9 @@ class InitState extends State{
         // Objects
         Objects.trench = new Trench();
         Objects.trench.init();
+
+        Objects.lazer = new Lazer();
+        Objects.lazer.init();
     
         Post.init();
   
@@ -79,22 +83,26 @@ class MainState extends State{
     }
     enter(){
         Objects.trench.show();
+        Objects.lazer.show();
     }
     update(){
         mainScene.update();
         Objects.trench.update();
+        Objects.lazer.update();
         Post.update();
         // Renderer.update(mainScene, Cameras.mainCamera);
         // Renderer.update(gemBackFacingScene, Cameras.mainCamera);
     }
     exit(){
         Objects.trench.hide();
+        Objects.lazer.hide();
     }
     click(event){
 
     }
     keyDown(event){
         Cameras.keyDown(event);
+        Objects.lazer.keyDown(event); 
     }
 }
 export let mainState = new MainState();
