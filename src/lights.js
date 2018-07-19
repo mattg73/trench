@@ -10,8 +10,6 @@ class Lights {
 
     this.lazer = new PointLight(0xff2222, 1, 3);
     
-
-
     //var helper = new CameraHelper( this.sun.shadow.camera );
     //mainScene.add( helper );
 
