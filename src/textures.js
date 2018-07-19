@@ -31,6 +31,21 @@ export let Textures = {
     url: texturePath+'bolt-red.png',
     encoding: sRGBEncoding,
     data: null
+  },
+  obstacleHigh: {
+    url: texturePath+'obstacle-high-bake.png',
+    encoding: sRGBEncoding,
+    data: null
+  },
+  obstacleMid: {
+    url: texturePath+'obstacle-mid-bake.png',
+    encoding: sRGBEncoding,
+    data: null
+  },
+  obstacleLow: {
+    url: texturePath+'obstacle-low-bake.png',
+    encoding: sRGBEncoding,
+    data: null
   }
 };
 

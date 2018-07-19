@@ -137,7 +137,6 @@ export default class Trench {
     if(this.currentSegment >= this.cumulativeSegmentsPassed + this.map[this.currentLevel][this.currentSection].sectionLength){
       this.cumulativeSegmentsPassed += this.map[this.currentLevel][this.currentSection].sectionLength;
       this.currentSection++;
-      //this.generateMap()
     }
 
     // Move trench
@@ -201,15 +200,19 @@ class Obstacle{
   init(spawnOffset){
     
     const heights = [10, 25, 40];
+    const heightIndex = Math.floor(Math.random()*3);
+    const obstacleMaterials = [Materials.obstacleLow, Materials.obstacleMid, Materials.obstacleHigh]
+    const obstacleTextures = [Textures.obstacleLow.data, Textures.obstacleMid.data, Textures.obstacleHigh.data];
 
     this.mesh = (Models.obstacle.data.scene.children[0].clone());
 
-    this.mesh.material = Materials.obstacle;
-
-    //this.mesh.material.map = Textures.boltRed.data;
+    this.mesh.material = obstacleMaterials[heightIndex];
+    
+    this.mesh.material.map = obstacleTextures[heightIndex];
+    this.mesh.material.map.flipY = false;
 
     this.mesh.position.x = 0;
-    this.mesh.position.y = heights[Math.floor(Math.random()*3)];
+    this.mesh.position.y = heights[heightIndex];
     this.mesh.position.z = spawnOffset;
   }
 

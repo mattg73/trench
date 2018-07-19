@@ -33,5 +33,7 @@ export default Materials = {
   prefab5: new MeshBasicMaterial(basicParams),
   lazer: new MeshStandardMaterial(lazerParams),
   boltRed: new MeshBasicMaterial(basicParams),
-  obstacle: new MeshStandardMaterial(obstacleParams   ),
+  obstacleHigh: new MeshBasicMaterial(basicParams),
+  obstacleMid: new MeshBasicMaterial(basicParams),
+  obstacleLow: new MeshBasicMaterial(basicParams)
 }  
