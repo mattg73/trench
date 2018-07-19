@@ -42,6 +42,7 @@ class Cameras {
         break;
       case 38:
         // up
+        event.preventDefault();
         this.acceleration.y = this.maxAcceleration;
         break;
       case 39:
@@ -50,6 +51,7 @@ class Cameras {
         break;
       case 40:
         // down
+        event.preventDefault();
         this.acceleration.y = -this.maxAcceleration;
         break;
       default:

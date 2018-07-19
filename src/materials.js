@@ -19,6 +19,12 @@ const lazerParams = {
   metalness: 0
 }
 
+const obstacleParams = {
+  color: new Color('rgb(200, 200, 200)'),
+  roughness: 0.7,
+  metalness: 0
+}
+
 export default Materials = {
   prefab1: new MeshBasicMaterial(basicParams),
   prefab2: new MeshBasicMaterial(basicParams),
@@ -27,4 +33,5 @@ export default Materials = {
   prefab5: new MeshBasicMaterial(basicParams),
   lazer: new MeshStandardMaterial(lazerParams),
   boltRed: new MeshBasicMaterial(basicParams),
-}
+  obstacle: new MeshStandardMaterial(obstacleParams   ),
+}  

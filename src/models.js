@@ -29,5 +29,9 @@ export default Models = {
   bolt: {
     url: modelPath+'lazer-bolt.glb',
     data: null
+  },
+  obstacle: {
+    url: modelPath+'obstacle.glb',
+    data: null
   }
 };

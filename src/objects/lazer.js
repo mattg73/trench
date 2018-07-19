@@ -94,14 +94,13 @@ class Bolt{
   init(spawnPosition, muzzleOffset){
     this.speed = 400;
  
-     this.source = new Vector2();
+    this.source = new Vector2();
     this.target = new Vector2();
     this.rotation = new Vector2();
 
     this.mesh = (Models.bolt.data.scene.children[0].clone());
 
     this.mesh.material = Materials.boltRed;
-    //this.mesh.material.side = DoubleSide;
     this.mesh.material.transparent = true;
 
     this.mesh.material.map = Textures.boltRed.data;

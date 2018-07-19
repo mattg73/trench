@@ -12,10 +12,38 @@ export default class Trench {
   }
 
   init(){
-    this.speed = 100
+    this.speed = 200
 
     this.segments = 100;
     this.segmentDepth = 50
+
+    this.currentLevel = 0;
+    this.currentSection = 0;
+    this.currentSegment = 0;
+    this.cumulativeSegmentsPassed = 0;
+
+    this.map = [
+      [
+        {// start
+          sectionLength: 20,
+          hazard: 'none',
+          separation: 20,
+          occurence: 0.0 
+        }, 
+        {// horizontal
+          sectionLength: 100,
+          hazard: 'obstacle',
+          separation: 4,
+          occurence: 0.8 
+        },
+        {// end
+          sectionLength: 20,
+          hazard: 'none',
+          separation: 20,
+          occurence: 0.0 
+        }
+      ] 
+    ]
 
     const prefab1 = new Object3D();
     const prefab2 = new Object3D();
@@ -71,7 +99,7 @@ export default class Trench {
   
           //mesh.material.normalMap = Textures.objectNormal.data;
           //mesh.material.normalMap.flipY = false;
-         // mesh.material.normalMap.anisotropy = 16;
+           //mesh.material.normalMap.anisotropy = 16;
   
           //mesh.material.metalness = 1;
           
@@ -97,19 +125,66 @@ export default class Trench {
 
     mainScene.add(this.trench);
     //mainScene.add(this.container);
+
+    this.generateMap();
   }
 
   update(){
     const elapsed = Timer.getDelta();
 
+    // Check to see if we've reached a new section in the map
+    this.currentSegment = Math.floor(this.trench.position.z / this.segmentDepth);
+    if(this.currentSegment >= this.cumulativeSegmentsPassed + this.map[this.currentLevel][this.currentSection].sectionLength){
+      this.cumulativeSegmentsPassed += this.map[this.currentLevel][this.currentSection].sectionLength;
+      this.currentSection++;
+      //this.generateMap()
+    }
+
+    // Move trench
     this.trench.position.z += this.speed * elapsed;
 
+    // Push passed trench segments to the horizon
     for(var i=0; i<this.segments; i++){
-      const segment = this.trench.children[i]
-      
+      const segment = this.trench.children[i];
       if (this.trench.position.z + segment.position.z > this.segmentDepth){
         segment.position.z -= this.segments * this.segmentDepth
       }
+    }
+  }
+
+  generateMap(){
+    let cumulativeOffset = 0;
+
+    for(var sections=0; sections<this.map[this.currentLevel].length; sections++){
+
+      const sectionDetail = this.map[this.currentLevel][sections];
+
+      for(var i=0; i<sectionDetail.sectionLength; i++){
+        if(i % sectionDetail.separation === 0){
+          if(Math.random() < sectionDetail.occurence){
+            
+            switch(sectionDetail.hazard) {
+              case 'none':
+                break;
+              case 'tower':
+                
+                break;
+              case 'obstacle':
+                const hazard = new Obstacle();
+                hazard.init((cumulativeOffset + i) * -this.segmentDepth);
+                this.trench.add(hazard.mesh);
+                break;
+              default:
+                //code block
+                break;
+            }  
+           
+          }
+        }
+      }
+
+      cumulativeOffset += sectionDetail.sectionLength;
+      //console.log(cumulativeOffset)
     }
   }
 
@@ -119,5 +194,26 @@ export default class Trench {
 
   hide(){
     this.trench.visible = false;
+  }
+}
+
+class Obstacle{
+  init(spawnOffset){
+    
+    const heights = [10, 25, 40];
+
+    this.mesh = (Models.obstacle.data.scene.children[0].clone());
+
+    this.mesh.material = Materials.obstacle;
+
+    //this.mesh.material.map = Textures.boltRed.data;
+
+    this.mesh.position.x = 0;
+    this.mesh.position.y = heights[Math.floor(Math.random()*3)];
+    this.mesh.position.z = spawnOffset;
+  }
+
+  update(){
+
   }
 }
